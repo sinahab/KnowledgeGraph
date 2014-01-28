@@ -11,14 +11,15 @@ public class Page extends JFrame {
     setDefaultCloseOperation(EXIT_ON_CLOSE);
   }
 
-  public static void main(String[] args) {
-    SwingUtilities.invokeLater(new Runnable() {
-        @Override
-        public void run() {
-            Page page = new Page();
-            page.setVisible(true);
-        }
-    });
-  }
-	
+//  public static void main(String[] args) {
+//    SwingUtilities.invokeLater(new Runnable() {
+//        @Override
+//        public void run() {
+//            Page page = new Page();
+//            page.setVisible(true);
+//        }
+//    });
+//  }
+//	
+  
 }
