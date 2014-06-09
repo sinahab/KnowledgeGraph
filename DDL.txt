@@ -1,0 +1,6 @@
+
+CREATE TABLE Subjects (
+  s_name varchar(30) NOT NULL,
+  description text,
+  PRIMARY KEY (s_name)
+)
