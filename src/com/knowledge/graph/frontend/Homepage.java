@@ -50,6 +50,14 @@ public class Homepage extends Page {
 		   }
 	    });
 		JButton signupButton = new JButton("Signup");
+		signupButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+			   Mainpage.signuppage = new SignupPage();
+			   Mainpage.homepage.setVisible(false);
+			   Mainpage.signuppage.setVisible(true);
+		   }
+	    });
+
 		bottomPanel.add(loginButton);
 		bottomPanel.add(signupButton);
 		

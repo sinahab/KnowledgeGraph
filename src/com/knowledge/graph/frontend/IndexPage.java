@@ -9,6 +9,11 @@ public class IndexPage extends Page {
 		JPanel boxPanel = new JPanel();
 		boxPanel.setLayout(new BoxLayout(boxPanel, BoxLayout.PAGE_AXIS));
 		
+		IndexTree indexTree = new IndexTree();
+		boxPanel.add(indexTree);
 		
+		add(boxPanel);
 	}
+	
+	
 }
