@@ -6,14 +6,15 @@ import com.knowledge.graph.frontend.Homepage;
 import com.knowledge.graph.frontend.IndexPage;
 import com.knowledge.graph.frontend.LoginPage;
 import com.knowledge.graph.frontend.Page;
+import com.knowledge.graph.frontend.SignupPage;
 
 	
 public class Mainpage {
 	
 	public static Homepage homepage;
 	public static LoginPage loginpage;
+	public static SignupPage signuppage;
 	public static IndexPage indexpage;
-	
 	
 	public static void main(String[] args) {
 	    SwingUtilities.invokeLater(new Runnable() {

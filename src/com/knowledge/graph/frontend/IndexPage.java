@@ -7,8 +7,8 @@ public class IndexPage extends Page {
 
 	public IndexPage() {
 		JPanel boxPanel = new JPanel();
-		boxPanel.setLayout(new BoxLayout(boxPanel, BoxLayout.PAGE_AXIS));
-		
-		
+		boxPanel.setLayout(new BoxLayout(boxPanel, BoxLayout.PAGE_AXIS));		
 	}
+	
+	
 }
