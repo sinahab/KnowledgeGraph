@@ -12,6 +12,8 @@ public class Page extends JFrame {
     setDefaultCloseOperation(EXIT_ON_CLOSE);
   }
 
+  // hello
+  
 //  public static void main(String[] args) {
 //    SwingUtilities.invokeLater(new Runnable() {
 //        @Override
