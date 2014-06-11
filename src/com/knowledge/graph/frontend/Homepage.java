@@ -43,12 +43,12 @@ public class Homepage extends Page {
 		// Create buttons for bottom panel
 		JButton loginButton = new JButton("Login");
 		loginButton.addActionListener(new ActionListener() {
-	           public void actionPerformed(ActionEvent event) {
-	               Mainpage.loginpage = new LoginPage();
-	               Mainpage.homepage.setVisible(false);
-	               Mainpage.loginpage.setVisible(true);
-	          }
-	       });
+			public void actionPerformed(ActionEvent event) {
+			   Mainpage.loginpage = new LoginPage();
+			   Mainpage.homepage.setVisible(false);
+			   Mainpage.loginpage.setVisible(true);
+		   }
+	    });
 		JButton signupButton = new JButton("Signup");
 		bottomPanel.add(loginButton);
 		bottomPanel.add(signupButton);
