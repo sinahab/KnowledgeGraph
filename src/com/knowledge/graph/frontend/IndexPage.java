@@ -1,4 +1,4 @@
-package com.knowledge.graph;
+package com.knowledge.graph.frontend;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

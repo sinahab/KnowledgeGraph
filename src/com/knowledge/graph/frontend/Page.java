@@ -1,4 +1,4 @@
-package com.knowledge.graph;
+package com.knowledge.graph.frontend;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
