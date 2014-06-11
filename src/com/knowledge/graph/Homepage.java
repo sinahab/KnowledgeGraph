@@ -1,3 +1,4 @@
+package com.knowledge.graph;
 
 import javax.swing.JLabel;
 
