@@ -1,6 +1,5 @@
 package com.knowledge.graph.frontend;
 
-import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
@@ -12,8 +11,6 @@ public class IndexTree extends JPanel implements TreeSelectionListener {
 	private JTree indexTree;
 
 	public IndexTree() {
-		JPanel boxPanel = new JPanel();
-		boxPanel.setLayout(new BoxLayout(boxPanel, BoxLayout.PAGE_AXIS));
 		
 		// Create root node and populate tree
 	    DefaultMutableTreeNode top = new DefaultMutableTreeNode("Knowledge Graph");
@@ -21,11 +18,30 @@ public class IndexTree extends JPanel implements TreeSelectionListener {
 	    
 	    indexTree = new JTree(top);
 	    JScrollPane treeView = new JScrollPane(indexTree);
-	    boxPanel.add(treeView);
-	    add(boxPanel);
+	    add(treeView);
 	}
 	
 	private void populateTree(DefaultMutableTreeNode top) {
+		DefaultMutableTreeNode subject = null;
+		DefaultMutableTreeNode topic = null;
+		DefaultMutableTreeNode concept = null;
+		
+		// Add subject
+		subject = new DefaultMutableTreeNode("Database Systems");
+		top.add(subject);
+		
+		// Add topics
+		topic = new DefaultMutableTreeNode("ER Diagrams");
+		subject.add(topic);
+
+		// Add concepts
+		concept = new DefaultMutableTreeNode("Entity");
+		topic.add(concept);
+		concept = new DefaultMutableTreeNode("Relation");
+		topic.add(concept);
+		
+		topic = new DefaultMutableTreeNode("SQL");
+		subject.add(topic);
 		
 	}
 
