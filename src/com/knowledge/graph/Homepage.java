@@ -1,13 +1,19 @@
 package com.knowledge.graph;
 
 import java.awt.Font;
-
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 public class Homepage extends Page {
 	
 	public Homepage() {
 
+		// setting up the panel
+		JPanel panel = new JPanel();
+	    getContentPane().add(panel);
+	    panel.setLayout(null);
+	    
 		// space component
         JLabel spacer = new JLabel(" ");
 		
@@ -19,8 +25,19 @@ public class Homepage extends Page {
 		JLabel subtitle = new JLabel("Knowledge by students for students ...");
 		subtitle.setFont(new Font("Helvetica", Font.BOLD, 18));
 
-		add(title);
-		add(spacer);
-		add(subtitle);
+		// adding components to the panel
+		panel.add(title);
+		panel.add(spacer);
+		panel.add(subtitle);
 	}	
+	
+	public static void main(String[] args) {
+	    SwingUtilities.invokeLater(new Runnable() {
+	        public void run() {
+	            Homepage homepage = new Homepage();
+	            homepage.setVisible(true);
+	        }
+	    });
+	}
+	
 }
