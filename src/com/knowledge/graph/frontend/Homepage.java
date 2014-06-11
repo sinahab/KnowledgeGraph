@@ -4,13 +4,19 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Homepage extends JPanel {
+import com.knowledge.graph.Mainpage;
+
+public class Homepage extends Page {
 	
 	public Homepage() {
+		// Setup box layout
+		JPanel boxPanel = new JPanel();
+		boxPanel.setLayout(new BoxLayout(boxPanel, BoxLayout.PAGE_AXIS));
 		
 		// Create top panel for words
 		JPanel topPanel = new JPanel();		
@@ -38,7 +44,9 @@ public class Homepage extends JPanel {
 		JButton loginButton = new JButton("Login");
 		loginButton.addActionListener(new ActionListener() {
 	           public void actionPerformed(ActionEvent event) {
-	               System.exit(0);
+	               Mainpage.loginpage = new LoginPage();
+	               Mainpage.homepage.setVisible(false);
+	               Mainpage.loginpage.setVisible(true);
 	          }
 	       });
 		JButton signupButton = new JButton("Signup");
@@ -46,8 +54,9 @@ public class Homepage extends JPanel {
 		bottomPanel.add(signupButton);
 		
 		// Add top and bottom panels to homepage
-		add(topPanel);
-		add(bottomPanel);
+		boxPanel.add(topPanel);
+		boxPanel.add(bottomPanel);
+		add(boxPanel);
 	}	
 	
 }
