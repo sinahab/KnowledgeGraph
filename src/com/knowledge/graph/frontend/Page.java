@@ -2,7 +2,7 @@ package com.knowledge.graph.frontend;
 
 import javax.swing.JFrame;
 
-public class Page extends JFrame {
+public abstract class Page extends JFrame {
 
   public Page() {
     setTitle("The Complete Student Knowledge Base");

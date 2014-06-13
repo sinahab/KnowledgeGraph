@@ -9,6 +9,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
 
 import com.knowledge.graph.Mainpage;
+import com.knowledge.graph.frontend.panel.QuestionsPanel;
 
 public class IndexTree extends JPanel implements TreeSelectionListener {
 	private JTree indexTree;
@@ -77,7 +78,7 @@ public class IndexTree extends JPanel implements TreeSelectionListener {
 		if (node instanceof ConceptNode) {
 			System.out.println("Concept #" + Integer.toString(((ConceptNode) node).getID()) + " selected");
 			Mainpage.indexpage.setVisible(false);
-			Mainpage.questionspage = new QuestionsPage(((ConceptNode) node).getID());
+			Mainpage.questionspage = new QuestionsPanel(((ConceptNode) node).getID());
 			Mainpage.questionspage.setVisible(true);
 		}
 	}
