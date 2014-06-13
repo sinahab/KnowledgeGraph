@@ -11,7 +11,7 @@ public class Students {
 			String query = "INSERT INTO Students (student_number, first_name, last_name, degree, password )"
 							+ "VALUES ("+ student_ID+", "+first_name+", "+last_name+", "+degree+","+password+");";
 			Statement statement = connection.createStatement();
-			statement.execute(query);
+			statement.executeUpdate(query);
 		}
 		catch(SQLException e){
 			System.out.println("Insertion of student was unsuccesful!");
@@ -25,9 +25,33 @@ public class Students {
 					e.printStackTrace();
 				}
 			}
-		}
+		}	
+	}//end addStudent
+	
+	public void deleteStudentByID(int student_id){
 		
-	}
+		Connection connection = JdbcSqlConnection.getConnection();
+		
+		try{
+			String query = "DELETE FROM Students WHERE student_number = " + student_id+";";
+			Statement statement = connection.createStatement();
+			statement.executeUpdate(query);
+		}
+		catch(SQLException e){
+			System.out.println("Deletion was unsuccesful!");
+		}
+		finally{
+			if(connection!=null)
+				try{
+					connection.close();
+				}
+				catch(SQLException e){
+					e.printStackTrace();
+				}
+		}
+	}//end deleteStudentByID
+	
+	
 	
 	
 }
