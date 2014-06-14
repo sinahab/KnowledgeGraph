@@ -84,4 +84,33 @@ public class Questions {
 		}
 		return q_list;
 	}//end searchQuestionsBySID
+	
+	public List<Answer> getTiedAnswers(int q_id){
+		
+		Connection connection = JdbcSqlConnection.getConnection();
+		List<Answer> tied_answers = new ArrayList<Answer>();
+		try{
+			String query = "SELECT * FROM TiedAnswers WHERE q_id ="+q_id;
+			Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery(query);
+			
+			while(rs.next()){
+				tied_answers.add(new Answer(rs.getNString("text"),rs.getInt("student_number"), 
+						rs.getInt("q_id"),rs.getNString("status")));
+			}
+		}
+		catch(SQLException e){
+			System.out.println("An error occured while searching!");
+		}
+		finally{
+			if(connection!=null)
+				try{
+					connection.close();
+				}
+				catch(Exception e){
+					e.printStackTrace();
+				}
+		}
+		return tied_answers;
+	}//end getTiedAnswers
 }
