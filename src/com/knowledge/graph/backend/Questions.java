@@ -35,7 +35,7 @@ public class Questions {
 		Connection connection = JdbcSqlConnection.getConnection();
 		Question question = null;
 		try{
-			String query = "SELECT * FROM AskedConceptQuestions WHERE q_id="+q_id+";";
+			String query = "SELECT * FROM AskedConceptQuestions WHERE q_id="+q_id;
 			Statement statement = connection.createStatement();
 			ResultSet rs = statement.executeQuery(query);
 			question = new Question(rs.getNString("text"),rs.getInt("q_id"), rs.getInt("student_number"), rs.getInt("c_id"));
@@ -60,12 +60,12 @@ public class Questions {
 		List<Question> q_list = new ArrayList<Question>();
 		Connection connection = JdbcSqlConnection.getConnection();
 		try{
-			String query = "SELECT (*) FROM AskedConceptQuestions WHERE s_id="+student_id+";";
+			String query = "SELECT * FROM AskedConceptQuestions WHERE student_number ="+student_id;
 			Statement statement = connection.createStatement();
 			ResultSet rs = statement.executeQuery(query);
 			
 			while(rs.next()){
-				Question question = new Question(rs.getNString("text"), rs.getInt("q_id"), rs.getInt("s_id"),
+				Question question = new Question(rs.getNString("text"), rs.getInt("q_id"), rs.getInt("student_number"),
 												rs.getInt("c_id"));
 				q_list.add(question);
 			}

@@ -4,9 +4,9 @@ import java.sql.*;
 
 public class JdbcSqlConnection {
 
-	public static final String url = "";
-	public static final String user = "";
-	private static final String password = "";
+	public static final String url = "jdbc:mysql://localhost:3306/KnowledgeGraph";
+	public static final String user = "root";
+	private static final String password = "h3nri3tta";
 	public static final String DRIVER_CLASS = "com.mysql.jdbc.Driver";
 	
 	//static refernce to itself 
