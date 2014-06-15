@@ -17,6 +17,16 @@ public class Test {
 			System.out.println(q1.getStudent_ID());
 			System.out.println(q1.getText()+"\n");
 		}
+		
+		List<Student> list2 = q.getStudentEveryConcept();
+		Iterator<Student> iterate2 = list2.iterator();
+		
+		while(iterate2.hasNext()){
+			Student a1 = iterate2.next();
+			System.out.println(a1.getFullName());
+			System.out.println(a1.getStudentID()+"\n");
+		}
+		
 	}
 
 }

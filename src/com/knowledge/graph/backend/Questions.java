@@ -122,8 +122,8 @@ public class Questions {
 		
 		try{
 			Statement statement = connection.createStatement();
-			//returns the number of concepts 
-			String subquery = "(SELECT COUNT(*) FROM Concepts)";
+			//returns the number of concepts excluding "others"
+			String subquery = "(SELECT COUNT(*) FROM BelongedConcepts WHERE c_id<>999999)";
 			String query = "SELECT s.* FROM AskedConceptQuestions t, Students s WHERE t.student_number=s.student_number"
 					      +" GROUP BY t.student_number HAVING count(DISTINCT t.c_id)="+subquery;
 			ResultSet rs = statement.executeQuery(query);
