@@ -14,7 +14,6 @@ public class Questions {
 					+ "VALUES ("+question_text + "," + student_id + "c_id" + ");";
 			Statement statement = connection.createStatement();
 			statement.executeUpdate(query);
-			
 		}
 		catch(SQLException e){
 			System.out.println("Insertion was unsuccesful!");
@@ -39,7 +38,6 @@ public class Questions {
 			Statement statement = connection.createStatement();
 			ResultSet rs = statement.executeQuery(query);
 			question = new Question(rs.getNString("text"),rs.getInt("q_id"), rs.getInt("student_number"), rs.getInt("c_id"));
-			
 		}
 		catch(SQLException e){
 			System.out.println("An error occured while searching!");
@@ -113,4 +111,41 @@ public class Questions {
 		}
 		return tied_answers;
 	}//end getTiedAnswers
+	
+	/**
+	 * 
+	 * @return A list containing students who have asked at least one question in every concept
+	 */
+	public List<Student> getStudentEveryConcept(){
+		Connection connection = JdbcSqlConnection.getConnection();
+		List<Student> students = new ArrayList<Student>();
+		
+		try{
+			Statement statement = connection.createStatement();
+			//returns the number of concepts 
+			String subquery = "(SELECT COUNT(*) FROM Concepts)";
+			String query = "SELECT s.* FROM AskedConceptQuestions t, Students s WHERE t.student_number=s.student_number"
+					      +" GROUP BY t.student_number HAVING count(DISTINCT t.c_id)="+subquery;
+			ResultSet rs = statement.executeQuery(query);
+			
+			while(rs.next()){
+				students.add(new Student(rs.getInt("student_number"), rs.getNString("first_name"),
+						rs.getNString("last_name"),rs.getNString("degree"),rs.getNString("password")));
+			}
+		}
+		catch(SQLException e){
+			System.out.println("An error occured while searching!");
+			e.printStackTrace();
+		}
+		finally{
+			if(connection!=null)
+				try{
+					connection.close();
+				}
+				catch(Exception e){
+					e.printStackTrace();
+				}
+		}
+		return students;
+	}//end getStudentEveryConcept
 }
