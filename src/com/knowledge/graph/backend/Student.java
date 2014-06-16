@@ -17,7 +17,7 @@ public class Student {
 		this.last_name = last_name;
 		this.degree = degree;
 		this.password = password;
-		fullname = first_name + last_name;
+		fullname = first_name +" "+ last_name;
 	}
 	
 	public int getStudentID(){

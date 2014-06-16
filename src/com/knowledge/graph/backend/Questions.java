@@ -148,4 +148,41 @@ public class Questions {
 		}
 		return students;
 	}//end getStudentEveryConcept
+	
+	public List<Student> getAskedMostQuestions(){
+		Connection connection = JdbcSqlConnection.getConnection();
+		List<Student> students = new ArrayList<Student>();
+		try{
+			Statement statement = connection.createStatement();
+			//Finds the number of questions answered for each student_number
+			String subquery = "(SELECT count(*) FROM AskedConceptQuestions GROUP BY student_number)";
+			String query = "SELECT Distinct s.* "
+					+ "FROM Students s, AskedConceptQuestions t "
+					+ "WHERE s.student_number=t.student_number "
+					+ "GROUP BY t.student_number "
+					+ "HAVING count(*)>=ALL "+subquery;
+			
+			ResultSet rs = statement.executeQuery(query);
+			
+			while(rs.next()){
+				students.add(new Student(rs.getInt("student_number"),rs.getNString("first_name"),rs.getNString("last_name"),
+					rs.getNString("degree"),rs.getNString("password")));
+			}
+			
+		}
+		catch(SQLException e){
+			System.out.println("An error occured while searching!");
+			e.printStackTrace();
+		}
+		finally{
+			if(connection!=null)
+				try{
+					connection.close();
+				}
+				catch(Exception e){
+					e.printStackTrace();
+				}
+		}
+		return students;
+	}
 }
