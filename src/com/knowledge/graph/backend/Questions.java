@@ -168,7 +168,6 @@ public class Questions {
 				students.add(new Student(rs.getInt("student_number"),rs.getNString("first_name"),rs.getNString("last_name"),
 					rs.getNString("degree"),rs.getNString("password")));
 			}
-			
 		}
 		catch(SQLException e){
 			System.out.println("An error occured while searching!");
@@ -184,5 +183,36 @@ public class Questions {
 				}
 		}
 		return students;
+	}
+	
+	public List<Question> findMostRecentQuestion(){
+		Connection connection = JdbcSqlConnection.getConnection();
+		List<Question> questions = new ArrayList<Question>();
+		
+		try{
+			Statement statement = connection.createStatement();
+			String subquery = "(SELECT MIN(create_date) FROM AskedConceptQuestions)";
+			String query = "SELECT * FROM AskedConceptQuestions WHERE create_date= "+subquery;
+			ResultSet rs = statement.executeQuery(query);
+			
+			while(rs.next()){
+				questions.add(new Question(rs.getNString("text"), rs.getInt("q_id"), rs.getInt("student_number"),
+						rs.getInt("c_id")));
+			}
+		}
+		catch(SQLException e){
+			System.out.println("An error occured while searching!");
+			e.printStackTrace();
+		}
+		finally{
+			if(connection!=null)
+				try{
+					connection.close();
+				}
+				catch(Exception e){
+					e.printStackTrace();
+				}
+		}
+		return questions;
 	}
 }
