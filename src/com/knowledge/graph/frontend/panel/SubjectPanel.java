@@ -11,9 +11,9 @@ public class SubjectPanel extends DirectoryPanel {
 	}
 
 	@Override
-	protected DefaultListModel<NodeWrapper> generateList() {
+	protected DefaultListModel generateList() {
 		// TODO Auto-generated method stub
-		DefaultListModel<NodeWrapper> list = new DefaultListModel<NodeWrapper>();
+		DefaultListModel list = new DefaultListModel();
 		list.addElement(new NodeWrapper("Math", 1));
 		list.addElement(new NodeWrapper("Science", 2));
 		list.addElement(new NodeWrapper("Coffee", 3));

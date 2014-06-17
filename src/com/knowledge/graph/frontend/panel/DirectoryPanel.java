@@ -11,12 +11,13 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.EtchedBorder;
 
 public abstract class DirectoryPanel extends JPanel {
 	protected JLabel description;
 	protected JButton add_button;
-	protected JList<DefaultListModel<NodeWrapper>> list;
+	protected JList list;
 	protected int ID;
 	
 	public DirectoryPanel(String name) {
@@ -26,6 +27,9 @@ public abstract class DirectoryPanel extends JPanel {
 		description.setPreferredSize(new Dimension(500,50));
 		add_button = new JButton("Add New");
 		list = new JList(generateList());
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		list.setLayoutOrientation(JList.VERTICAL);
+		
 		generateGUI();
 	}
 	
@@ -54,5 +58,5 @@ public abstract class DirectoryPanel extends JPanel {
 		
 	}
 	protected abstract String getDescription();
-	protected abstract DefaultListModel<NodeWrapper> generateList();
+	protected abstract DefaultListModel generateList();
 }
