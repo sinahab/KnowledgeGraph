@@ -16,8 +16,11 @@ import javax.swing.JTree;
 import javax.swing.border.EtchedBorder;
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import com.knowledge.graph.frontend.panel.SubjectPanel;
+
 public class IndexPage extends Page {
 	public static JPanel nav_bar;
+	public static SubjectPanel subject;
 
 	public IndexPage() {
 		JPanel background = new JPanel(new BorderLayout());
@@ -64,6 +67,10 @@ public class IndexPage extends Page {
 		user_pane.setPreferredSize(new Dimension(150,20));
 		
 		background.add(user_pane, BorderLayout.LINE_END);
+		
+		// Meat in the middle
+		subject = new SubjectPanel();
+		background.add(subject, BorderLayout.CENTER);
 		
 		add(background);
 	}
