@@ -1,6 +1,6 @@
 package com.knowledge.graph.backend;
 import java.sql.*;
-
+import java.util.*;
 
 public class Subjects {
 	
@@ -51,6 +51,33 @@ public class Subjects {
 		}
 	}//end updateDescriptionWithSID
 	
-	
+	public List<Topic> getTiedTopics(int subject_id){
+		Connection connection = JdbcSqlConnection.getConnection();
+		List<Topic> tied_topics = new ArrayList<Topic>();
+		
+		try{
+			Statement statement = connection.createStatement();
+			String query = "SELECT * FROM BelongedTopics WHERE s_id="+subject_id;
+			ResultSet rs = statement.executeQuery(query);
+			
+			while(rs.next()){
+				tied_topics.add(new Topic(rs.getNString("t_name"),rs.getNString("description"), rs.getInt("t_id"), rs.getInt("s_id")));
+			}
+		}
+		catch(SQLException e){
+			System.out.println("An error occured while searching!");
+			e.printStackTrace();
+		}
+		finally{
+			if(connection!=null)
+				try{
+					connection.close();
+				}
+				catch(Exception e){
+					e.printStackTrace();
+				}
+		}
+		return tied_topics;
+	}
 	
 }

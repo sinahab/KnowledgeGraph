@@ -33,4 +33,32 @@ public class Answers {
 		}
 		return tied_answers;
 	}// end getAnswerBySID
+	
+	public Question getTied_Question(int q_id){
+		Connection connection = JdbcSqlConnection.getConnection();
+		Question question = null;
+		
+		try{
+			Statement statement = connection.createStatement();
+			String query = "SELECT * FROM AskedConceptQuestions WHERE q_id="+q_id;
+			ResultSet rs = statement.executeQuery(query);
+			rs.next();
+			question = new Question(rs.getNString("text"), rs.getInt("q_id"), rs.getInt("student_number"),
+												rs.getInt("c_id"));
+		}
+		catch(SQLException e){
+			System.out.println("An error occured while searching!");
+			e.printStackTrace();
+		}
+		finally{
+			if(connection!=null)
+				try{
+					connection.close();
+				}
+				catch(Exception e){
+					e.printStackTrace();
+				}
+		}
+		return question;
+	}
 }

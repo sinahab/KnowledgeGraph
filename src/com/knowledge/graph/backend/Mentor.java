@@ -1,6 +1,6 @@
 package com.knowledge.graph.backend;
 import java.util.*;
-
+import java.sql.*;
 public class Mentor extends Student{
 	
 	int Mentor_ID;
@@ -24,5 +24,8 @@ public class Mentor extends Student{
 		return mentored_students;
 	}
 	
+	public void approveQuestion(){
+		
+	}
 	
 }

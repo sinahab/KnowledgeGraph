@@ -36,4 +36,13 @@ public class Student {
 		Integer sID = new Integer(student_ID);
 		return "Name: "+fullname+"\nStudent ID:"+ sID.toString()+"\nDegree: "+degree;
 	}
+	
+	public boolean checkPassword(String password){
+		boolean authenticate = false;
+		
+		if(password.equals(this.password))
+			authenticate = true;
+		
+		return authenticate;
+	}
 }
