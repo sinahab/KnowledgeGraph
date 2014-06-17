@@ -37,8 +37,10 @@ public class Test {
 			System.out.println(a1.getFullName());
 			System.out.println(a1.getStudentID()+"\n");
 		}
-		
-		
+		System.out.println("-------------------------------TEST 4-------------------------------------");
+		Students s = new Students();
+		Student student = s.searchForStudentBySID(19392125);
+		System.out.println(student.getFullName());
 		
 	}
 

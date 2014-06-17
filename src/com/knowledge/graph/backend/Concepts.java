@@ -12,8 +12,8 @@ public class Concepts {
 			Statement statement = connection.createStatement();
 			String query = "SELECT * FROM BelongedConcepts WHERE c_id="+concept_id;
 			ResultSet rs = statement.executeQuery(query);
-			rs.next();
-			concept = new Concept(rs.getInt("c_id"), rs.getNString("c_name"),rs.getNString("description"),
+			if(rs.next())
+				concept = new Concept(rs.getInt("c_id"), rs.getNString("c_name"),rs.getNString("description"),
 					rs.getInt("t_id"));		
 		}
 		catch(SQLException e){

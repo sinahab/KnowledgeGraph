@@ -40,6 +40,7 @@ public class Students {
 		}
 		catch(SQLException e){
 			System.out.println("Deletion was unsuccesful!");
+			e.printStackTrace();
 		}
 		finally{
 			if(connection!=null)
@@ -57,12 +58,13 @@ public class Students {
 		Student student = null;
 		Connection connection = JdbcSqlConnection.getConnection();
 		try{
-			String query = "SELECT * FROM Students WHERE student_number ="+sid;
+			String query = "SELECT * FROM Students WHERE student_number="+sid;
 			Statement statement = connection.createStatement();
 			ResultSet rs = statement.executeQuery(query);
-			student = new Student(rs.getInt("student_number"), rs.getNString("first_name"),
+			if(rs.next()){
+				student = new Student(rs.getInt("student_number"), rs.getNString("first_name"),
 					rs.getNString("last_name"), rs.getNString("degree"), rs.getNString("password"));
-			
+			}
 		}
 		catch(SQLException e){
 			System.out.println("An error occured while searching!");

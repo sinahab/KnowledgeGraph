@@ -37,7 +37,8 @@ public class Questions {
 			String query = "SELECT * FROM AskedConceptQuestions WHERE q_id="+q_id;
 			Statement statement = connection.createStatement();
 			ResultSet rs = statement.executeQuery(query);
-			question = new Question(rs.getNString("text"),rs.getInt("q_id"), rs.getInt("student_number"), rs.getInt("c_id"));
+			if(rs.next())
+				question = new Question(rs.getNString("text"),rs.getInt("q_id"), rs.getInt("student_number"), rs.getInt("c_id"));
 		}
 		catch(SQLException e){
 			System.out.println("An error occured while searching!");
