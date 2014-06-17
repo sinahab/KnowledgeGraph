@@ -1,6 +1,5 @@
 package com.knowledge.graph.backend;
 
-import static org.junit.Assert.*;
 import java.util.*;
 
 public class Test {
@@ -10,6 +9,9 @@ public class Test {
 		Questions q = new Questions();
 		List<Question> list = q.searchQuestionsBySID(19392125);
 		Iterator<Question> iterate = list.iterator();
+		
+		// SINA'S TESTS		
+		// Question question = q.searchQuestionsBySID(3);
 		
 		System.out.println("-------------------------------TEST 1-------------------------------------");
 		while(iterate.hasNext()){

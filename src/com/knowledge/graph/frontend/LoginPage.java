@@ -14,6 +14,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import com.knowledge.graph.Mainpage;
+import com.knowledge.graph.backend.Student;
+import com.knowledge.graph.backend.Students;
 
 public class LoginPage extends Page {
 
@@ -32,7 +34,7 @@ public class LoginPage extends Page {
 		constraint.weightx = 1; constraint.weighty = 1;
 		background.add(sid_label, constraint);
 		
-		JTextField sid_field = new JTextField();
+		final JTextField sid_field = new JTextField();
 		constraint.gridx = 1; constraint.weightx = 2;
 		constraint.insets = new Insets(0, 0, 0, 30);
 		background.add(sid_field, constraint);
@@ -44,7 +46,7 @@ public class LoginPage extends Page {
 		constraint.insets = new Insets(0, 0, 0, 0);
 		background.add(pass_label, constraint);
 		
-		JPasswordField pass_field = new JPasswordField();
+		final JPasswordField pass_field = new JPasswordField();
 		constraint.gridx = 1; constraint.weightx = 2;
 		constraint.insets = new Insets(0, 0, 0, 30);
 		background.add(pass_field, constraint);
@@ -53,9 +55,15 @@ public class LoginPage extends Page {
 		JButton login_button = new JButton("Login");
 		login_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-			   Mainpage.indexpage = new IndexPage();
-			   Mainpage.loginpage.setVisible(false);
-			   Mainpage.indexpage.setVisible(true);
+				Mainpage.dbStudents = new Students();
+				Student student = Mainpage.dbStudents.searchForStudentBySID( Integer.parseInt( sid_field.getText()) );
+				if ( student.checkPassword( new String(pass_field.getPassword()) ) ) {
+					Mainpage.indexpage = new IndexPage();
+					Mainpage.loginpage.setVisible(false);
+					Mainpage.indexpage.setVisible(true);
+				} else {
+					
+				}
 		   }
 	    });
 		constraint.anchor = GridBagConstraints.LAST_LINE_START;
