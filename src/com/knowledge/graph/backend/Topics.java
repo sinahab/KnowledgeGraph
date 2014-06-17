@@ -43,8 +43,8 @@ public class Topics {
 			String query = "SELECT * FROM BelongedTopics WHERE t_id="+t_id;
 			ResultSet rs = statement.executeQuery(query);
 			
-			rs.next();
-			topic = new Topic(rs.getNString("t_name"),rs.getNString("description"), rs.getInt("t_id"), rs.getInt("s_id"));
+			if(rs.next())
+				topic = new Topic(rs.getNString("t_name"),rs.getNString("description"), rs.getInt("t_id"), rs.getInt("s_id"));
 		}
 		catch(SQLException e){
 			System.out.println("An error occured while searching!");

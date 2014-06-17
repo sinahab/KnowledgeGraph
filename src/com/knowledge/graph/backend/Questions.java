@@ -37,7 +37,8 @@ public class Questions {
 			String query = "SELECT * FROM AskedConceptQuestions WHERE q_id="+q_id;
 			Statement statement = connection.createStatement();
 			ResultSet rs = statement.executeQuery(query);
-			question = new Question(rs.getNString("text"),rs.getInt("q_id"), rs.getInt("student_number"), rs.getInt("c_id"));
+			if(rs.next())
+				question = new Question(rs.getNString("text"),rs.getInt("q_id"), rs.getInt("student_number"), rs.getInt("c_id"));
 		}
 		catch(SQLException e){
 			System.out.println("An error occured while searching!");
@@ -123,7 +124,7 @@ public class Questions {
 		try{
 			Statement statement = connection.createStatement();
 			//returns the number of concepts excluding "others"
-			String subquery = "(SELECT COUNT(*) FROM BelongedConcepts WHERE c_id<>999999)";
+			String subquery = "(SELECT COUNT(*) FROM BelongedConcepts WHERE c_id<>1)";
 			String query = "SELECT s.* FROM AskedConceptQuestions t, Students s WHERE t.student_number=s.student_number"
 					      +" GROUP BY t.student_number HAVING count(DISTINCT t.c_id)="+subquery;
 			ResultSet rs = statement.executeQuery(query);
@@ -185,6 +186,42 @@ public class Questions {
 		return students;
 	}
 	
+	public List<Student> getAskedLeastQuestions(){
+		Connection connection = JdbcSqlConnection.getConnection();
+		List<Student> students = new ArrayList<Student>();
+		try{
+			Statement statement = connection.createStatement();
+			//Finds the number of questions answered for each student_number
+			String subquery = "(SELECT count(*) FROM AskedConceptQuestions GROUP BY student_number)";
+			String query = "SELECT Distinct s.* "
+					+ "FROM Students s, AskedConceptQuestions t "
+					+ "WHERE s.student_number=t.student_number "
+					+ "GROUP BY t.student_number "
+					+ "HAVING count(*)<=ALL "+subquery;
+			
+			ResultSet rs = statement.executeQuery(query);
+			
+			while(rs.next()){
+				students.add(new Student(rs.getInt("student_number"),rs.getNString("first_name"),rs.getNString("last_name"),
+					rs.getNString("degree"),rs.getNString("password")));
+			}
+		}
+		catch(SQLException e){
+			System.out.println("An error occured while searching!");
+			e.printStackTrace();
+		}
+		finally{
+			if(connection!=null)
+				try{
+					connection.close();
+				}
+				catch(Exception e){
+					e.printStackTrace();
+				}
+		}
+		return students;
+	}
+	
 	public List<Question> findMostRecentQuestion(){
 		Connection connection = JdbcSqlConnection.getConnection();
 		List<Question> questions = new ArrayList<Question>();
@@ -215,4 +252,6 @@ public class Questions {
 		}
 		return questions;
 	}
+	
+	
 }

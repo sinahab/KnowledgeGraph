@@ -15,7 +15,7 @@ public class NodeWrapper {
 		return name;
 	}
 	
-	public int ID() {
+	public int getID() {
 		return ID;
 	}
 	

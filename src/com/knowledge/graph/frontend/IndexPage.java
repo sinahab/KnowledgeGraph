@@ -1,8 +1,11 @@
 package com.knowledge.graph.frontend;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -16,11 +19,18 @@ import javax.swing.JTree;
 import javax.swing.border.EtchedBorder;
 import javax.swing.tree.DefaultMutableTreeNode;
 
-import com.knowledge.graph.frontend.panel.SubjectPanel;
+import com.knowledge.graph.frontend.panel.ConceptsPanel;
+import com.knowledge.graph.frontend.panel.QuestionsPanel;
+import com.knowledge.graph.frontend.panel.SubjectsPanel;
+import com.knowledge.graph.frontend.panel.TopicsPanel;
 
 public class IndexPage extends Page {
 	public static JPanel nav_bar;
-	public static SubjectPanel subject;
+	public static SubjectsPanel subject;
+	public static TopicsPanel topic;
+	public static ConceptsPanel concept;
+	public static JPanel cards;
+	public static QuestionsPanel question;
 
 	public IndexPage() {
 		JPanel background = new JPanel(new BorderLayout());
@@ -34,7 +44,22 @@ public class IndexPage extends Page {
 		
 		// Navigation bar for navigation history
 		nav_bar = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JButton home = new JButton("Home");
+		final JButton home = new JButton("Home");
+		home.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				// Show subject
+				CardLayout cl = (CardLayout) cards.getLayout();
+				cl.show(cards, "Subject");
+				
+				// Remove extra buttons from nav bar
+				nav_bar.removeAll();
+				nav_bar.add(home);
+				JLabel arrow_spacer = new JLabel(" > ");
+				nav_bar.add(arrow_spacer);
+				nav_bar.revalidate();
+				nav_bar.repaint();
+			}
+		});
 		nav_bar.add(home);
 		JLabel arrow_spacer = new JLabel(" > ");
 		nav_bar.add(arrow_spacer);
@@ -69,8 +94,9 @@ public class IndexPage extends Page {
 		background.add(user_pane, BorderLayout.LINE_END);
 		
 		// Meat in the middle
-		subject = new SubjectPanel();
-		background.add(subject, BorderLayout.CENTER);
+		cards = new JPanel(new CardLayout());
+		cards.add(new SubjectsPanel(), "Subject");
+		background.add(cards, BorderLayout.CENTER);
 		
 		add(background);
 	}
