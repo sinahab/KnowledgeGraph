@@ -72,14 +72,41 @@ public class Answers {
 		try{
 			Statement statement = connection.createStatement();
 			String status = "\"pending\"";
-			String update = "INSERT INTO TiedAnswers( text, q_id, status, student_number) VALUES ("+
-							text+", "+q_id+", "+status+", "+student_number+");";
+			String update = "INSERT INTO TiedAnswers( text, q_id, status, student_number) VALUES (\""+
+							text+"\", "+q_id+", \""+status+"\", "+student_number+");";
 			int result = statement.executeUpdate(update);
 			if(result==1)
 				success=true;
 		}
 		catch(SQLException e){
 			System.out.println("An error occured while updating!");
+			e.printStackTrace();
+		}
+		finally{
+			if(connection!=null)
+				try{
+					connection.close();
+				}
+				catch(Exception e){
+					e.printStackTrace();
+				}
+		}
+		return success;
+	}
+	
+	public boolean deleteAnswerByID(int answer_id){
+		Connection connection = JdbcSqlConnection.getConnection();
+		boolean success = false;
+		
+		try{
+			Statement statement = connection.createStatement();
+			String update = "DELETE FROM TiedAnswers WHERE a_id="+answer_id;
+			int result = statement.executeUpdate(update);
+			if(result==1)
+				success = true;
+		}
+		catch(SQLException e){
+			System.out.println("An error occured while searching!");
 			e.printStackTrace();
 		}
 		finally{
