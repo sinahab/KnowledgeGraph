@@ -29,4 +29,8 @@ public class Topic {
 		return this.description;
 	}
 	
+	public int getTopicID() {
+		return this.topic_id;
+	}
+	
 }

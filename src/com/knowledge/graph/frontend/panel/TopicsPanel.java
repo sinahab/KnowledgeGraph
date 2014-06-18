@@ -3,6 +3,7 @@ package com.knowledge.graph.frontend.panel;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -10,6 +11,8 @@ import javax.swing.JLabel;
 
 import com.knowledge.graph.Mainpage;
 import com.knowledge.graph.backend.Subject;
+import com.knowledge.graph.backend.Topic;
+import com.knowledge.graph.backend.Topics;
 import com.knowledge.graph.frontend.IndexPage;
 
 public class TopicsPanel extends DirectoryPanel {
@@ -26,9 +29,14 @@ public class TopicsPanel extends DirectoryPanel {
 	@Override
 	protected DefaultListModel generateList() {
 		DefaultListModel model = new DefaultListModel();
-		// Topics topics = Mainpage.getSubjects().getSubjectByID(ID).getTiedTopics()
-		model.addElement(new NodeWrapper("Algebra", 1));
-		model.addElement(new NodeWrapper("PDEs", 2));
+		List<Topic> topics = Mainpage.getSubjects().getTiedTopics(this.subject.getID());
+		
+		for (int i = 0; i < topics.size(); i++ ) {
+			model.addElement( new NodeWrapper(topics.get(i).getName(), topics.get(i).getTopicID()) );
+		}
+
+		// model.addElement(new NodeWrapper("Algebra", 1));
+		// model.addElement(new NodeWrapper("PDEs", 2));
 		return model;
 	}
 
