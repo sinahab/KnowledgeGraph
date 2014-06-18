@@ -1,6 +1,8 @@
 package com.knowledge.graph.frontend.panel;
 
 import java.awt.CardLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -40,8 +42,21 @@ public class TopicsPanel extends DirectoryPanel {
 		c.show(IndexPage.cards, "Concept");
 		
 		// Add new navi button
-		IndexPage.nav_bar.add(new JLabel(" > "));
-		IndexPage.nav_bar.add(new JButton(node.getName()));
+		IndexPage.concepts_button = new JButton(node.getName());
+		IndexPage.concepts_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				CardLayout cl = (CardLayout) IndexPage.cards.getLayout();
+				cl.show(IndexPage.cards, "Concept");
+				if (IndexPage.questions_button != null) {
+					IndexPage.nav_bar.remove(IndexPage.questions_button);
+				}
+				IndexPage.nav_bar.revalidate();
+				IndexPage.nav_bar.repaint();
+			}
+		});
+		IndexPage.concepts_spacer = new JLabel(" > ");
+		IndexPage.nav_bar.add(IndexPage.concepts_spacer);
+		IndexPage.nav_bar.add(IndexPage.concepts_button);
 		IndexPage.nav_bar.revalidate();
 	}
 

@@ -31,6 +31,13 @@ public class IndexPage extends Page {
 	public static ConceptsPanel concept;
 	public static JPanel cards;
 	public static QuestionsPanel question;
+	
+	// Navbar buttons
+	public static JButton topics_button;
+	public static JButton concepts_button;
+	public static JLabel concepts_spacer;
+	public static JButton questions_button;
+	public static JLabel questions_spacer;
 
 	public IndexPage() {
 		JPanel background = new JPanel(new BorderLayout());
