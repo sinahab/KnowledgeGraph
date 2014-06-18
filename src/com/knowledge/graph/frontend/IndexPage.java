@@ -20,6 +20,8 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import com.knowledge.graph.Mainpage;
+import com.knowledge.graph.backend.Mentor;
+import com.knowledge.graph.backend.Student;
 import com.knowledge.graph.frontend.panel.AnswerPanel;
 import com.knowledge.graph.frontend.panel.ConceptsPanel;
 import com.knowledge.graph.frontend.panel.QuestionsPanel;
@@ -136,8 +138,11 @@ public class IndexPage extends Page {
 		users.add(mentors);
 		DefaultMutableTreeNode mentees = new DefaultMutableTreeNode("Mentees");
 		users.add(mentees);
-		mentors.add(new DefaultMutableTreeNode("Yoda"));
-		mentees.add(new DefaultMutableTreeNode("Obi Wan"));
-		mentees.add(new DefaultMutableTreeNode("Luke Skywalker"));
+		for ( Mentor mentor : Mainpage.student.getMentors() ) {
+			mentors.add(new DefaultMutableTreeNode( mentor.getFullName()) );
+		}
+		for ( Student mentee : Mainpage.student.getMentees() ) {
+			mentees.add(new DefaultMutableTreeNode( mentee.getFullName()) );
+		}
 	}	
 }
