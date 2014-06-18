@@ -25,6 +25,7 @@ public abstract class DirectoryPanel extends JPanel {
 	protected JFormattedTextField add_name; // Name of new field added
 	protected JFormattedTextField add_field;
 	protected JButton go_button;
+	protected JButton delete_button;
 	public JList list;
 	protected int ID;
 	
@@ -48,6 +49,13 @@ public abstract class DirectoryPanel extends JPanel {
 				goAction();
 			}
 		});
+		delete_button = new JButton("Delete");
+		delete_button.setPreferredSize(new Dimension(100,20));
+		delete_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				deleteAction();
+			}
+		});
 
 		add_name = new JFormattedTextField();
 		add_name.setPreferredSize(new Dimension(400,20));
@@ -69,9 +77,13 @@ public abstract class DirectoryPanel extends JPanel {
 		// Add buttons
 		constraint.gridy = 2;
 		constraint.gridx = 1;
-		constraint.gridwidth = 2;
-		constraint.anchor = GridBagConstraints.PAGE_START;
+		constraint.gridwidth = 1;
+		constraint.anchor = GridBagConstraints.LINE_END;
 		add(go_button, constraint);
+		
+		constraint.gridx = 0;
+		constraint.anchor = GridBagConstraints.LINE_START;
+		add(delete_button, constraint);
 		
 		// Add Scrollpane and list
 	    scroll = new JScrollPane(list);
@@ -101,7 +113,28 @@ public abstract class DirectoryPanel extends JPanel {
 		return name;
 	}
 	
+	protected void redrawMeatPanel() {
+		// Refresh display
+		remove(scroll);
+		GridBagConstraints constraint = new GridBagConstraints();
+		list = new JList(generateList());
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		list.setLayoutOrientation(JList.VERTICAL);
+		scroll = new JScrollPane(list);
+		scroll.setPreferredSize(new Dimension(500, 200));
+		constraint.gridx = 0; constraint.gridy = 3;
+		constraint.weightx = 2; constraint.weighty = 10;
+		constraint.gridwidth = 2;
+		constraint.anchor = GridBagConstraints.FIRST_LINE_START;
+		add(scroll, constraint);
+		add_name.setText("");
+		add_field.setText("");
+		revalidate();
+		repaint();
+	}
+	
 	protected abstract DefaultListModel generateList();
 	protected abstract void goAction();
+	protected abstract void deleteAction();
 	protected abstract void addAction();
 }
