@@ -33,4 +33,32 @@ public class Topic {
 		return this.topic_id;
 	}
 	
+	public Subject getTiedSubject(){
+		Connection connection = JdbcSqlConnection.getConnection();
+		Subject subject = null;
+		try{
+			Statement statement = connection.createStatement();
+			String query = "SELECT * FROM Subjects s, BelongedTopics t WHERE t_id="+topic_id+" AND t.s_id=s.s_id"+";";
+			ResultSet rs = statement.executeQuery(query);
+			
+			if(rs.next())
+				subject = new Subject(rs.getInt("s_id"), rs.getNString("s_name"), rs.getNString("description"));
+		}
+		catch(SQLException e){
+			System.out.println("An error occured while searching!");
+			e.printStackTrace();
+		}
+		finally{
+			if(connection!=null)
+				try{
+					connection.close();
+				}
+				catch(Exception e){
+					e.printStackTrace();
+				}
+		}
+		return subject;
+	}
+	
+	
 }
