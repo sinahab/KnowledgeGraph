@@ -38,13 +38,11 @@ public class TopicsPanel extends DirectoryPanel {
 		System.out.println(this.ID);
 		
 		List<Topic> topics = Mainpage.getSubjects().getTiedTopics(this.ID);
-		
-		for (int i = 0; i < topics.size(); i++ ) {
-			model.addElement( new NodeWrapper(topics.get(i).getName(), topics.get(i).getTopicID()) );
+		if (topics != null) {
+			for (int i = 0; i < topics.size(); i++ ) {
+				model.addElement( new NodeWrapper(topics.get(i).getName(), topics.get(i).getTopicID()) );
+			}
 		}
-
-		// model.addElement(new NodeWrapper("Algebra", 1));
-		// model.addElement(new NodeWrapper("PDEs", 2));
 		return model;
 	}
 
