@@ -8,23 +8,27 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
+import com.knowledge.graph.Mainpage;
 import com.knowledge.graph.frontend.IndexPage;
 
 public class TopicsPanel extends DirectoryPanel {
 
 	public TopicsPanel(int ID) {
 		super("Topic");
+		// super( Mainpage.getSubjects().getSubjectByID(ID).getName() );
 		this.ID = ID;
 	}
 
 	@Override
 	protected String getDescription() {
 		return "Mathematical!";
+		// return Mainpage.getSubjects().getSubjectByID(ID).getDescription()
 	}
 
 	@Override
 	protected DefaultListModel generateList() {
 		DefaultListModel model = new DefaultListModel();
+		// Topics topics = 
 		model.addElement(new NodeWrapper("Algebra", 1));
 		model.addElement(new NodeWrapper("PDEs", 2));
 		return model;
