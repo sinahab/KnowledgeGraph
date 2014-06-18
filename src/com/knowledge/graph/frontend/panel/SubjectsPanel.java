@@ -4,11 +4,15 @@ import java.awt.CardLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 
+import com.knowledge.graph.Mainpage;
 import com.knowledge.graph.backend.Student;
+import com.knowledge.graph.backend.Subject;
+import com.knowledge.graph.backend.Subjects;
 import com.knowledge.graph.frontend.IndexPage;
 
 public class SubjectsPanel extends DirectoryPanel {
@@ -23,9 +27,10 @@ public class SubjectsPanel extends DirectoryPanel {
 	@Override
 	protected DefaultListModel generateList() {
 		DefaultListModel list = new DefaultListModel();
-		list.addElement(new NodeWrapper("Math", 1));
-		list.addElement(new NodeWrapper("Science", 2));
-		list.addElement(new NodeWrapper("Coffee", 3));
+		List<Subject> allSubjects = Mainpage.getSubjects().getAllSubjects();
+		for (int i = 0; i < allSubjects.size(); i++ ) {
+			list.addElement(new NodeWrapper(allSubjects.get(i).getName(), i));
+		}
 		return list;
 	}
 
