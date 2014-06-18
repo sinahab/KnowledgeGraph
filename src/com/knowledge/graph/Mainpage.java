@@ -4,6 +4,7 @@ import javax.swing.SwingUtilities;
 
 import com.knowledge.graph.backend.Answers;
 import com.knowledge.graph.backend.Concepts;
+import com.knowledge.graph.backend.Mentors;
 import com.knowledge.graph.backend.Questions;
 import com.knowledge.graph.backend.Student;
 import com.knowledge.graph.backend.Students;
@@ -27,6 +28,7 @@ public class Mainpage {
 	public static Concepts concepts;
 	public static Questions questions;
 	public static Students students;
+	public static Mentors mentors;
 	public static Subjects subjects;
 	public static Topics topics;
 	
@@ -46,5 +48,12 @@ public class Mainpage {
 			students = new Students();
 		}
 		return students;
+	}
+	
+	public static Mentors getMentors() {
+		if (mentors == null) {
+			mentors = new Mentors();
+		}
+		return mentors;
 	}
 }

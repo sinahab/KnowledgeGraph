@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -138,7 +139,6 @@ public class IndexPage extends Page {
 		users.add(mentors);
 		DefaultMutableTreeNode mentees = new DefaultMutableTreeNode("Mentees");
 		users.add(mentees);
-		
 		// checking to find mentors.
 		if ( Mainpage.student.getMentors() != null) {
 			for ( Mentor mentor : Mainpage.student.getMentors() ) {
@@ -146,8 +146,12 @@ public class IndexPage extends Page {
 			}
 		}
 		// checking to find mentees.
-		if ( Mainpage.student).getMentees() != null) {
-			for ( Student mentee : ((Mentor) Mainpage.student).getMentees() ) {
+		Mentor mentor =  Mainpage.getMentors().getMentorByID( Mainpage.student.getStudentID() );
+		List<Student> student_mentees = mentor.getMentees();
+
+		if ( mentor.getMentees() != null) {
+			
+			for ( Student mentee : mentor.getMentees() ) {
 				mentees.add(new DefaultMutableTreeNode( mentee.getFullName()) );
 			}
 		}

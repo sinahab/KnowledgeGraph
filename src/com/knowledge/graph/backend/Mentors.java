@@ -93,7 +93,8 @@ public class Mentors {
 		Mentor mentor = null;
 		Connection connection = JdbcSqlConnection.getConnection();
 		try{
-			String query = "SELECT DISTINCT s.*, m.mentored_student FROM Mentors m, Students s WHERE m.student_number = " + mentor_sid + "AND s.student_number = m.student_number;";
+			String query = "SELECT DISTINCT s.*, m.mentored_student FROM Mentors m, Students s WHERE m.student_number = " + mentor_sid + " AND s.student_number = m.student_number;";
+			System.out.println(query);
 			Statement statement = connection.createStatement();
 			ResultSet rs = statement.executeQuery(query);
 			if(rs.next()){

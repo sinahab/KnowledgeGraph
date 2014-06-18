@@ -13,7 +13,6 @@ public class Mentor extends Student{
 	}
 	
 	public boolean addMentee(int mentored_student){
-		
 		Connection connection = JdbcSqlConnection.getConnection();
 		boolean success = false;
 		
