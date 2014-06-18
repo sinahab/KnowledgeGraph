@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 
+import com.knowledge.graph.backend.Student;
 import com.knowledge.graph.frontend.IndexPage;
 
 public class SubjectsPanel extends DirectoryPanel {

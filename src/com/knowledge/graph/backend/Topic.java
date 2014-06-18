@@ -13,4 +13,12 @@ public class Topic {
 		topic_name = name;
 		this.description = description;
 	}
+	
+	public String getName() {
+		return this.topic_name;
+	}
+	
+	public String getDescription() {
+		return this.description;
+	}
 }
