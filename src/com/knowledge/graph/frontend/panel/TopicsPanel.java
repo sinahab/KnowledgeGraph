@@ -95,7 +95,11 @@ public class TopicsPanel extends DirectoryPanel {
 
 	@Override
 	protected void deleteAction() {
-		
+		// Find node
+		NodeWrapper node = (NodeWrapper)list.getSelectedValue();
+		Mainpage.getTopics().deleteTopicByID( node.getID() );
+
+		redrawMeatPanel();
 	}
 	
 	@Override

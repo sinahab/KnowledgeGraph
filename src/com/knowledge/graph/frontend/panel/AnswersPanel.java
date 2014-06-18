@@ -61,7 +61,11 @@ public class AnswersPanel extends DirectoryPanel {
 	
 	@Override
 	protected void deleteAction() {
-		
+		// Find node
+		NodeWrapper node = (NodeWrapper)list.getSelectedValue();
+		Mainpage.getAnswers().deleteAnswerByID( node.getID() );
+
+		redrawMeatPanel();
 	}
 
 	@Override

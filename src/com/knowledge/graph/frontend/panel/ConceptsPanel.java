@@ -92,7 +92,11 @@ public class ConceptsPanel extends DirectoryPanel {
 
 	@Override
 	protected void deleteAction() {
-		
+		// Find node
+		NodeWrapper node = (NodeWrapper)list.getSelectedValue();
+		Mainpage.getConcepts().deleteConceptByID( node.getID() );
+
+		redrawMeatPanel();
 	}
 	
 	@Override
