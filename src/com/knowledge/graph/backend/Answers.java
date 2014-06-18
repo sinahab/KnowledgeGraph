@@ -94,7 +94,37 @@ public class Answers {
 		return success;
 	}
 	
-	
+	public List<Integer> getUnapprovedMenteeAnswersByMentorID(int mentor_id ){
+		Connection connection = JdbcSqlConnection.getConnection();
+		List<Integer> unapproved_answers = new ArrayList<Integer>();
+		try{
+			String query = "SELECT a.* FROM TiedAnswers a, Mentors m WHERE a.student_number=m.mentored_student AND a.status<>\"approved\""
+					+ " AND m.student_number="+mentor_id;
+			Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery(query);
+			while(rs.next()){
+				unapproved_answers.add(new Integer(rs.getInt("a_id")));
+			}	
+		}
+		catch(SQLException e){
+			System.out.println("An error occured while searching!");
+			e.printStackTrace();
+		}
+		finally{
+			if(connection!=null)
+				try{
+					connection.close();
+				}
+				catch(Exception e){
+					e.printStackTrace();
+				}
+		}
+		if(unapproved_answers.isEmpty())
+			return null;
+		else{
+			return unapproved_answers;
+		}
+	}
 	
 	
 	
