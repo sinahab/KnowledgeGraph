@@ -1,5 +1,6 @@
 package com.knowledge.graph.frontend;
 
+import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,53 +15,63 @@ import com.knowledge.graph.Mainpage;
 
 public class SignupPage extends Page {
 
+	private JPanel boxPanel;
+	
 	public SignupPage() {
 		// Setup box layout
-		JPanel boxPanel = new JPanel();
+		boxPanel = new JPanel();
 		boxPanel.setLayout(new BoxLayout(boxPanel, BoxLayout.PAGE_AXIS));
 		
 		// Create student number panel
 		JLabel sidLabel = new JLabel("Student Number: ");
-		JFormattedTextField sidField = new JFormattedTextField();
+		final JFormattedTextField sidField = new JFormattedTextField();
 		JPanel sidPanel = new JPanel(new GridLayout(1,0));
 		sidPanel.add(sidLabel);
 		sidPanel.add(sidField);
 		
 		// Create first name panel
 		JLabel fnameLabel = new JLabel("First name: ");
-		JFormattedTextField fnameField = new JFormattedTextField();
+		final JFormattedTextField fnameField = new JFormattedTextField();
 		JPanel fnamePanel = new JPanel(new GridLayout(1,0));
 		sidPanel.add(fnameLabel);
 		sidPanel.add(fnameField);
 		
 		// Create last name panel
 		JLabel lnameLabel = new JLabel("Last name: ");
-		JFormattedTextField lnameField = new JFormattedTextField();
+		final JFormattedTextField lnameField = new JFormattedTextField();
 		JPanel lnamePanel = new JPanel(new GridLayout(1,0));
 		sidPanel.add(lnameLabel);
 		sidPanel.add(lnameField);
 		
-		// Create last name panel
+		// Create degree panel
 		JLabel degLabel = new JLabel("Degree: ");
-		JFormattedTextField degField = new JFormattedTextField();
+		final JFormattedTextField degField = new JFormattedTextField();
 		JPanel degPanel = new JPanel(new GridLayout(1,0));
 		sidPanel.add(degLabel);
 		sidPanel.add(degField);
 
 		// Password panel
 		JLabel passLabel = new JLabel("Password :");
-		JFormattedTextField passField = new JFormattedTextField();
+		final JFormattedTextField passField = new JFormattedTextField();
 		JPanel passPanel = new JPanel(new GridLayout(1,0));
 		passPanel.add(passLabel);
 		passPanel.add(passField);
-		
+				
 		// Login buttons panel
 		JButton loginButton = new JButton("Login");
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-			   Mainpage.indexpage = new IndexPage();
-			   Mainpage.signuppage.setVisible(false);
-			   Mainpage.indexpage.setVisible(true);
+				// checking for valid input fields
+				if ( isValidSID(sidField.getText()) && 
+						isNonEmptyString(fnameField.getText()) &&
+						isNonEmptyString(lnameField.getText()) &&
+						isNonEmptyString(degField.getText()) &&
+						isNonEmptyString(passField.getText()) ) {
+					Mainpage.indexpage = new IndexPage();
+					Mainpage.signuppage.setVisible(false);
+					Mainpage.indexpage.setVisible(true);
+				} else {
+				}
 		   }
 	    });
 		JButton cancelButton = new JButton("Cancel");
@@ -84,4 +95,13 @@ public class SignupPage extends Page {
 		
 		this.add(boxPanel);
 	}
+	
+	private boolean isNonEmptyString(String s) {
+		if ( s!="" ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 }

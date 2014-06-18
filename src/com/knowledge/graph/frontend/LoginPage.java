@@ -58,7 +58,7 @@ public class LoginPage extends Page {
 		login_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				String sid_text_field = sid_field.getText();
-				if ( isValidSID(sid_text_field)) {
+				if (isValidSID(sid_text_field)) {
 					Mainpage.students = new Students();
 					Student student = Mainpage.students.searchForStudentBySID( Integer.parseInt( sid_text_field ));
 					if ( student != null ) {
@@ -100,24 +100,7 @@ public class LoginPage extends Page {
 		
 		this.add(background);
 	}
-	
-	private boolean isInteger(String s) {
-	    try { 
-	        Integer.parseInt(s); 
-	    } catch(NumberFormatException e) { 
-	        return false; 
-	    }
-	    return true;
-	}
-	
-	private boolean isValidSID(String s) {
-		if ( s!="" && isInteger(s)) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
+		
 	private void printLoginError() {
 		GridBagConstraints c = new GridBagConstraints();
 		JLabel loginErrorLabel = new JLabel("Wrong student number / password. Please try again.", JLabel.RIGHT);
