@@ -30,6 +30,7 @@ public class AnswersPanel extends DirectoryPanel {
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.setLayoutOrientation(JList.VERTICAL);
 		generateGUI();
+		add_name.setVisible(false);
 	}
 
 	@Override
@@ -61,13 +62,21 @@ public class AnswersPanel extends DirectoryPanel {
 	
 	@Override
 	protected void deleteAction() {
-		
+		// Find node
+		NodeWrapper node = (NodeWrapper)list.getSelectedValue();
+		Mainpage.getAnswers().deleteAnswerByID( node.getID() );
+
+		redrawMeatPanel();
 	}
 
 	@Override
 	protected void addAction() {
-		// TODO Auto-generated method stub
+		// Adds a new subject to the list of subjects
+		String body = add_field.getText();
+		Mainpage.getAnswers().addAnswer(question.getQuestion_ID(), body, Mainpage.student.getStudentID());
 		
+		// Refresh display
+		redrawMeatPanel();
 	}
 
 }

@@ -1,8 +1,6 @@
 package com.knowledge.graph.frontend.panel;
 
 import java.awt.CardLayout;
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -12,18 +10,15 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
 import com.knowledge.graph.Mainpage;
-import com.knowledge.graph.backend.Answer;
 import com.knowledge.graph.backend.Concept;
 import com.knowledge.graph.backend.Question;
 import com.knowledge.graph.backend.Student;
 import com.knowledge.graph.frontend.IndexPage;
 
 public class QuestionsPanel extends DirectoryPanel {
-	private JPanel user_pane;
 	private Student student;
 	private Concept concept;
 
@@ -78,15 +73,18 @@ public class QuestionsPanel extends DirectoryPanel {
 	
 	@Override
 	protected void deleteAction() {
-		
+		// Find node
+		NodeWrapper node = (NodeWrapper)list.getSelectedValue();
+		Mainpage.getQuestions().deleteQuestionByID( node.getID() );
+
+		redrawMeatPanel();
 	}
 
 	@Override
 	protected void addAction() {
 		// Adds a new subject to the list of subjects
-		String title = add_name.getText();
 		String body = add_field.getText();
-		Mainpage.getQuestions().addQuestion(body, student.getStudentID(), concept.getConcept_ID());
+		Mainpage.getQuestions().addQuestion(body, Mainpage.student.getStudentID(), concept.getConcept_ID());
 		
 		// Refresh display
 		redrawMeatPanel();

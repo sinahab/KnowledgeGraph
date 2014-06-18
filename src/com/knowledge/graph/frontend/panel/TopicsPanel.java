@@ -1,8 +1,6 @@
 package com.knowledge.graph.frontend.panel;
 
 import java.awt.CardLayout;
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -11,13 +9,11 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
 import com.knowledge.graph.Mainpage;
 import com.knowledge.graph.backend.Subject;
 import com.knowledge.graph.backend.Topic;
-import com.knowledge.graph.backend.Topics;
 import com.knowledge.graph.frontend.IndexPage;
 
 public class TopicsPanel extends DirectoryPanel {
@@ -95,12 +91,16 @@ public class TopicsPanel extends DirectoryPanel {
 
 	@Override
 	protected void deleteAction() {
-		
+		// Find node
+		NodeWrapper node = (NodeWrapper)list.getSelectedValue();
+		Mainpage.getTopics().deleteTopicByID( node.getID() );
+
+		redrawMeatPanel();
 	}
 	
 	@Override
 	protected void addAction() {
-		// Adds a new subject to the list of subjects
+		// Adds a new topic to the list of topics
 		String title = add_name.getText();
 		String body = add_field.getText();
 		Mainpage.getTopics().addTopic(title, body, subject.getID());

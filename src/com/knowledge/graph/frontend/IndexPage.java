@@ -30,7 +30,9 @@ import com.knowledge.graph.frontend.panel.SubjectsPanel;
 import com.knowledge.graph.frontend.panel.TopicsPanel;
 
 public class IndexPage extends Page {
+	public static JPanel background;
 	public static JPanel nav_bar;
+	public static JScrollPane user_pane;
 	public static SubjectsPanel subject;
 	public static TopicsPanel topic;
 	public static ConceptsPanel concept;
@@ -49,7 +51,7 @@ public class IndexPage extends Page {
 	public static JLabel answers_spacer;
 
 	public IndexPage() {
-		JPanel background = new JPanel(new BorderLayout());
+		background = new JPanel(new BorderLayout());
 		
 		// Name panel for name and date
 		JPanel name_pane = new JPanel(new BorderLayout());
@@ -114,7 +116,7 @@ public class IndexPage extends Page {
 	    populate_users(users);
 	    
 		JTree user_tree = new JTree(users);
-		JScrollPane user_pane = new JScrollPane(user_tree);
+		user_pane = new JScrollPane(user_tree);
 		user_pane.setPreferredSize(new Dimension(150,20));
 		
 		background.add(user_pane, BorderLayout.LINE_END);
@@ -158,5 +160,9 @@ public class IndexPage extends Page {
 				}
 			}
 		}
-	}	
+	}
+	
+	public static void redrawUserPane() {
+		
+	}
 }
