@@ -53,7 +53,7 @@ public class Test {
 		}
 	
 		System.out.println("-------------------------------TEST 4-------------------------------------");
-		Students s1 = new Students();
+		q.addQuestion("Placeholder ver2.0", 19392125, 5);
 		
 	}
 
