@@ -1,9 +1,14 @@
 package com.knowledge.graph.frontend.panel;
 
-import javax.swing.BoxLayout;
+import java.awt.CardLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.DefaultListModel;
+import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
+
+import com.knowledge.graph.frontend.IndexPage;
 
 public class QuestionsPanel extends DirectoryPanel {
 
@@ -13,19 +18,28 @@ public class QuestionsPanel extends DirectoryPanel {
 
 	@Override
 	protected String getDescription() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Why is the sky blue?";
 	}
 
 	@Override
 	protected DefaultListModel generateList() {
-		// TODO Auto-generated method stub
-		return null;
+		DefaultListModel model = new DefaultListModel();
+		model.addElement(new NodeWrapper("Because your face.", 1));
+		model.addElement(new NodeWrapper("Ask Sina Habibian", 2));
+		return model;
 	}
 
 	@Override
 	protected void goAction() {
-		// TODO Auto-generated method stub
+		// Find node
+		NodeWrapper node = (NodeWrapper)list.getSelectedValue();
 		
+		// Add new card
+		IndexPage.answer = new AnswerPanel(node.getID());
+		IndexPage.cards.add(IndexPage.answer, "Answer");
+		CardLayout c = (CardLayout) IndexPage.cards.getLayout();
+		c.show(IndexPage.cards, "Answer");
+		
+		// No navi button for answer
 	}
 }

@@ -16,9 +16,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EtchedBorder;
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import com.knowledge.graph.frontend.panel.AnswerPanel;
 import com.knowledge.graph.frontend.panel.ConceptsPanel;
 import com.knowledge.graph.frontend.panel.QuestionsPanel;
 import com.knowledge.graph.frontend.panel.SubjectsPanel;
@@ -31,6 +33,7 @@ public class IndexPage extends Page {
 	public static ConceptsPanel concept;
 	public static JPanel cards;
 	public static QuestionsPanel question;
+	public static AnswerPanel answer;
 	
 	// Navbar buttons
 	public static JButton topics_button;
@@ -126,5 +129,14 @@ public class IndexPage extends Page {
 		mentors.add(new DefaultMutableTreeNode("Yoda"));
 		mentees.add(new DefaultMutableTreeNode("Obi Wan"));
 		mentees.add(new DefaultMutableTreeNode("Luke Skywalker"));
+	}
+	
+	public static void main(String[] args) {
+	    SwingUtilities.invokeLater(new Runnable() {
+	        public void run() {
+	        	IndexPage i = new IndexPage();
+	        	i.setVisible(true);
+	        }
+	    });
 	}
 }
