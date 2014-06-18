@@ -75,8 +75,4 @@ public class Mentor extends Student{
 			return mentees;
 		}
 	}
-		
-	
-
-	
 }

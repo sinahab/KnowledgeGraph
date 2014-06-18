@@ -9,12 +9,8 @@ public class Students {
 		boolean success = false;
 		Connection connection = JdbcSqlConnection.getConnection();
 		try{
-
 			String update = "INSERT INTO Students (student_number, first_name, last_name, degree, password )"
 							+ "VALUES ("+ student_ID+", \""+first_name+"\", \""+last_name+"\", \""+degree+"\",\""+password+"\");";
-
-			
-
 			Statement statement = connection.createStatement();
 			int result  = statement.executeUpdate(update);
 			if(result==1)
