@@ -58,6 +58,11 @@ public class AnswersPanel extends DirectoryPanel {
 		// No navi button for answers
 		
 	}
+	
+	@Override
+	protected void deleteAction() {
+		
+	}
 
 	@Override
 	protected void addAction() {

@@ -75,6 +75,11 @@ public class QuestionsPanel extends DirectoryPanel {
 		IndexPage.nav_bar.add(IndexPage.answers_button);
 		IndexPage.nav_bar.revalidate();		
 	}
+	
+	@Override
+	protected void deleteAction() {
+		
+	}
 
 	@Override
 	protected void addAction() {

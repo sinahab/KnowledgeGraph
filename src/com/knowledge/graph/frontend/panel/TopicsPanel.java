@@ -94,6 +94,11 @@ public class TopicsPanel extends DirectoryPanel {
 	}
 
 	@Override
+	protected void deleteAction() {
+		
+	}
+	
+	@Override
 	protected void addAction() {
 		// Adds a new subject to the list of subjects
 		String title = add_name.getText();
