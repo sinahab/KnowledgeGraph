@@ -20,6 +20,9 @@ import com.knowledge.graph.backend.Students;
 public class LoginPage extends Page {
 	
 	private JPanel background;
+	private int SIDNotValidErrorFlag = 0;
+	private int SIDNotFoundErrorFlag = 0;
+	private int passNotCorrectErrorFlag = 0;
 
 	public LoginPage() {
 		// Setup box layout
@@ -59,27 +62,24 @@ public class LoginPage extends Page {
 			public void actionPerformed(ActionEvent event) {
 				String sid_text_field = sid_field.getText();
 				if ( isValidSID(sid_text_field)) {
-					
+					SIDNotValidErrorFlag = 0;
 					Mainpage.students = new Students();
 					Student student = Mainpage.students.searchForStudentBySID( Integer.parseInt( sid_text_field ));
-					if ( student == null ) {
-						GridBagConstraints c = new GridBagConstraints();
-						JLabel SIDNotFoundErrorLabel = new JLabel("Student number not found. Please try again.", JLabel.RIGHT);
-						c.gridx = 1; c.gridy = 2;
-						c.gridwidth = 1; c.gridheight = 1;
-						c.weightx = 1; c.weighty = 0;
-						background.add(SIDNotFoundErrorLabel, c);
-						background.revalidate();
-						background.repaint();
-					} else {
+					if ( student != null ) {
+						SIDNotFoundErrorFlag = 0;
 						if ( student.checkPassword( new String(pass_field.getPassword()) ) ) {
+							passNotCorrectErrorFlag = 0;
 							Mainpage.student = student;
 							Mainpage.indexpage = new IndexPage();
 							Mainpage.loginpage.setVisible(false);
 							Mainpage.indexpage.setVisible(true);
 						} else {
-							printPasswordNotFoundError();
+							passNotCorrectErrorFlag = 1;
+							printPassNotCorrectError();
 						}
+					} else {
+						SIDNotFoundErrorFlag = 1;
+						printSIDNotFoundError();
 					}
 				} else {
 					printSIDNotValidError();
@@ -132,18 +132,41 @@ public class LoginPage extends Page {
 		c.gridx = 1; c.gridy = 2;
 		c.gridwidth = 1; c.gridheight = 1;
 		c.weightx = 1; c.weighty = 0;
-		background.add(SIDNotValidErrorLabel, c);
+		if (SIDNotValidErrorFlag == 1) {
+			background.add(SIDNotValidErrorLabel, c);
+		} else {
+			background.remove(SIDNotValidErrorLabel);
+		}
 		background.revalidate();
 		background.repaint();
 	}
 	
-	private void printPasswordNotFoundError() {
+	private void printSIDNotFoundError() {
+		GridBagConstraints c = new GridBagConstraints();
+		JLabel SIDNotFoundErrorLabel = new JLabel("Student number not found. Please try again.", JLabel.RIGHT);
+		c.gridx = 1; c.gridy = 2;
+		c.gridwidth = 1; c.gridheight = 1;
+		c.weightx = 1; c.weighty = 0;
+		if (SIDNotFoundErrorFlag == 1) {
+			background.add(SIDNotFoundErrorLabel, c);
+		} else {
+			background.remove(SIDNotFoundErrorLabel);
+		}
+		background.revalidate();
+		background.repaint();
+	}
+	
+	private void printPassNotCorrectError() {
 		GridBagConstraints c = new GridBagConstraints();
 		JLabel passErrorLabel = new JLabel("Wrong password. Please try again.", JLabel.RIGHT);
 		c.gridx = 1; c.gridy = 3;
 		c.gridwidth = 1; c.gridheight = 1;
 		c.weightx = 1; c.weighty = 0;
-		background.add(passErrorLabel, c);
+		if (passNotCorrectErrorFlag == 1) {
+			background.add(passErrorLabel, c);
+		} else {
+			background.remove(passErrorLabel);
+		}
 		background.revalidate();
 		background.repaint();
 	}
