@@ -4,24 +4,41 @@ import java.sql.*;
 public class Mentor extends Student{
 	
 	int Mentor_ID;
+	int mentee_id;
 	
 	public Mentor(int student_ID, String first_name, String last_name,
-				String degree, String password, int Mentored_ID) {
+				String degree, String password, int mentee_id) {
 		super(student_ID, first_name, last_name, degree, password);
-
+		this.mentee_id = mentee_id;
 	}
 	
-	public boolean addMentored_Student(int mentored_student){
+	public boolean addMentee(int mentored_student){
 		
 		Connection connection = JdbcSqlConnection.getConnection();
 		boolean success = false;
 		
-		
-		
 		try{
 			Statement statement = connection.createStatement();
-			String query = "INSERT INTO Mentors(student_number, mentored_student) VALUES ("+Mentor_ID+", "+mentored_student
+			String update = "INSERT INTO Mentors(student_number, mentored_student) VALUES ("+Mentor_ID+", "+mentored_student+")";
+			int result = statement.executeUpdate(update);
+			if(result == 1){
+				success=true;
+			}
 		}
+		catch(SQLException e){
+			System.out.println("An error occured while updating!");
+			e.printStackTrace();
+		}
+		finally{
+			if(connection!=null)
+				try{
+					connection.close();
+				}
+				catch(Exception e){
+					e.printStackTrace();
+				}
+		}
+		return success;
 	}
 
 	

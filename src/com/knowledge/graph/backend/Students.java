@@ -13,9 +13,7 @@ public class Students {
 			String update = "INSERT INTO Students (student_number, first_name, last_name, degree, password )"
 							+ "VALUES ("+ student_ID+", \""+first_name+"\", \""+last_name+"\", \""+degree+"\",\""+password+"\");";
 
-			String query = "INSERT INTO Students (student_number, first_name, last_name, degree, password)"
-							+ " VALUES ("+ student_ID+", \""+first_name+"\", \""+last_name+"\", \""+degree+"\", \""+password+"\");";
-			System.out.println(query);
+			
 
 			Statement statement = connection.createStatement();
 			int result  = statement.executeUpdate(update);
