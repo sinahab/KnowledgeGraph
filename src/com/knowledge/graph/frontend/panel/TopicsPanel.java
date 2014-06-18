@@ -12,7 +12,9 @@ import com.knowledge.graph.Mainpage;
 import com.knowledge.graph.frontend.IndexPage;
 
 public class TopicsPanel extends DirectoryPanel {
-
+	
+	// private static subject = Mainpage.getSubjects(). 
+	
 	public TopicsPanel(int ID) {
 		super("Topic");
 		// super( Mainpage.getSubjects().getSubjectByID(ID).getName() );
@@ -28,7 +30,7 @@ public class TopicsPanel extends DirectoryPanel {
 	@Override
 	protected DefaultListModel generateList() {
 		DefaultListModel model = new DefaultListModel();
-		// Topics topics = 
+		// Topics topics = Mainpage.getSubjects().getSubjectByID(ID).getTiedTopics()
 		model.addElement(new NodeWrapper("Algebra", 1));
 		model.addElement(new NodeWrapper("PDEs", 2));
 		return model;
