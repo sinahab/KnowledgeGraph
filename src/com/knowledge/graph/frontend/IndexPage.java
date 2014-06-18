@@ -112,8 +112,8 @@ public class IndexPage extends Page {
 		background.add(quicklinks, BorderLayout.LINE_START);
 		
 		// Users pane for students and mentors
-	    DefaultMutableTreeNode users = new DefaultMutableTreeNode("Users");
-	    populate_users(users);
+		DefaultMutableTreeNode users = new DefaultMutableTreeNode("Users");
+	    IndexPage.populate_users(users);
 	    
 		JTree user_tree = new JTree(users);
 		user_pane = new JScrollPane(user_tree);
@@ -167,7 +167,9 @@ public class IndexPage extends Page {
 	    IndexPage.populate_users(users);
 	    
 		JTree user_tree = new JTree(users);
-		background.remove(user_pane);
+		if (user_pane != null) {
+			background.remove(user_pane);
+		}
 		user_pane = new JScrollPane(user_tree);
 		user_pane.setPreferredSize(new Dimension(150,20));
 		

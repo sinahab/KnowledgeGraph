@@ -119,7 +119,7 @@ public class Mentors {
 		return is_a_mentor;
 	}
 
-	public List<Mentor> approvedQuestion(int a_id){
+	public List<Mentor> mentorsWhoApprovedAnswer(int a_id){
 		Connection connection = JdbcSqlConnection.getConnection();
 		List<Mentor> mentors  = new ArrayList<Mentor>();
 		try{

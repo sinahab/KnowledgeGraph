@@ -5,6 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -15,20 +16,21 @@ import javax.swing.border.EtchedBorder;
 import com.knowledge.graph.Mainpage;
 import com.knowledge.graph.backend.Answer;
 import com.knowledge.graph.backend.Concept;
+import com.knowledge.graph.backend.Mentor;
 import com.knowledge.graph.backend.Question;
 import com.knowledge.graph.backend.Student;
 import com.knowledge.graph.frontend.IndexPage;
 
 public class AnswerPanel extends JPanel {
-	private int ID;
 	private Answer answer;
 	private Question question;
 	private Concept concept;
 	private Student asker;
 	private Student answerer;
+	private JButton approve;
+	private JPanel approver_panel;
 
 	public AnswerPanel(int ID) {
-		this.ID = ID;
 		answer = Mainpage.getAnswers().getAnswerByA_ID(ID);
 		question = Mainpage.getQuestions().searchQuestionByID(answer.getTiedQuestionID());
 		concept = Mainpage.getConcepts().getConceptByID(question.getConcept_ID());
@@ -77,7 +79,7 @@ public class AnswerPanel extends JPanel {
 		
 		// Add answerer
 		JPanel answerer_panel = new JPanel();
-		JLabel answerer_label = new JLabel("Answered by " + asker.getFullName() + 
+		JLabel answerer_label = new JLabel("Answered by " + answerer.getFullName() + 
 				" on " + answer.getAnswerDate() + "  ");
 		answerer_panel.add(answerer_label);
 		JButton add_ans_mentor = new JButton("Add as mentor");
@@ -91,9 +93,52 @@ public class AnswerPanel extends JPanel {
 		constraint.gridx = 0; constraint.gridy = 3;
 		constraint.weightx = 1; constraint.weighty = 0.1;
 		constraint.gridwidth = 1; constraint.gridheight = 1;
-		constraint.anchor = GridBagConstraints.FIRST_LINE_START;
+		constraint.anchor = GridBagConstraints.LINE_START;
 		add(answerer_panel, constraint);
 		
+		// Approvals
+		if (Mainpage.getMentors().isMentoring(Mainpage.student.getStudentID(), answerer.getStudentID())) {
+			approve = new JButton("Approve answer");
+			approve.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					Mentor mentor = Mainpage.getMentors().getMentorByID(Mainpage.student.getStudentID());
+					mentor.approveAnswer(answer.getAnswerID(), mentor.getStudentID());
+					redrawApprovals();
+				}
+			});
+			constraint.gridx = 1;
+			constraint.anchor = GridBagConstraints.LINE_END;
+			add(approve, constraint);
+			
+			
+		}
+		
+		if (answer.getStatus().equals("approved")) {
+			// Add approved by
+			redrawApprovals();
+		}
+		
+	}
+	
+	private void redrawApprovals() {
+		if (approver_panel != null) {
+			remove(approver_panel);
+		}
+		approver_panel = new JPanel();
+		List<Mentor> approvers = Mainpage.getMentors().mentorsWhoApprovedAnswer(answer.getAnswerID());
+		String namelist = "Approved by " + approvers.get(0).getFullName();
+		for (int i=1; i<approvers.size(); i++) {
+			namelist = namelist + " , " + approvers.get(i).getFullName();
+		}
+		JLabel approver_label = new JLabel(namelist);
+		approver_panel.add(approver_label);
+		GridBagConstraints constraint = new GridBagConstraints();
+		constraint.gridx = 0; constraint.gridy = 4;
+		constraint.weightx = 1; constraint.weighty = 0.1;
+		constraint.anchor = GridBagConstraints.FIRST_LINE_START;
+		add(approver_panel, constraint);
+		revalidate();
+		repaint();
 	}
 
 }

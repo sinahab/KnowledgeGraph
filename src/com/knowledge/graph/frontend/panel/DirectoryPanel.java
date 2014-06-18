@@ -43,7 +43,6 @@ public abstract class DirectoryPanel extends JPanel {
 			}
 		});
 		go_button = new JButton("Go");
-		go_button.setPreferredSize(new Dimension(100,20));
 		go_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				goAction();
@@ -115,7 +114,9 @@ public abstract class DirectoryPanel extends JPanel {
 	
 	protected void redrawMeatPanel() {
 		// Refresh display
-		this.remove(scroll);
+		if (scroll != null) {
+			this.remove(scroll);
+		}
 		GridBagConstraints constraint = new GridBagConstraints();
 		list = new JList(generateList());
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
