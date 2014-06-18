@@ -138,11 +138,18 @@ public class IndexPage extends Page {
 		users.add(mentors);
 		DefaultMutableTreeNode mentees = new DefaultMutableTreeNode("Mentees");
 		users.add(mentees);
-		for ( Mentor mentor : Mainpage.student.getMentors() ) {
-			mentors.add(new DefaultMutableTreeNode( mentor.getFullName()) );
+		
+		// checking to find mentors.
+		if ( Mainpage.student.getMentors() != null) {
+			for ( Mentor mentor : Mainpage.student.getMentors() ) {
+				mentors.add(new DefaultMutableTreeNode( mentor.getFullName()) );
+			}
 		}
-		for ( Student mentee : Mainpage.student.getMentees() ) {
-			mentees.add(new DefaultMutableTreeNode( mentee.getFullName()) );
+		// checking to find mentees.
+		if ( Mainpage.student).getMentees() != null) {
+			for ( Student mentee : ((Mentor) Mainpage.student).getMentees() ) {
+				mentees.add(new DefaultMutableTreeNode( mentee.getFullName()) );
+			}
 		}
 	}	
 }

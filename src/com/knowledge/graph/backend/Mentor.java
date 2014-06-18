@@ -10,21 +10,6 @@ public class Mentor extends Student{
 		super(student_ID, first_name, last_name, degree, password);
 	}
 	
-	public boolean addMentored_Student(int mentored_student){
-		
-		Connection connection = JdbcSqlConnection.getConnection();
-		boolean success = false;
-		
-		
-		
-		try{
-			Statement statement = connection.createStatement();
-			String query = "INSERT INTO Mentors(student_number, mentored_student) VALUES ("+Mentor_ID+", "+mentored_student
-		}
-	}
-
-	
-	
 	public List<Student> getMentees(){
 		Connection connection = JdbcSqlConnection.getConnection();
 		List<Student> mentees = new ArrayList<Student>();
