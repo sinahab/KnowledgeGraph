@@ -10,7 +10,7 @@ public class Topics {
 		try{
 			Statement statement = connection.createStatement();
 			String query = "INSERT INTO BelongedTopics(t_name, description, s_id) VALUES ("
-					+topic_name+", "+description+", "+subject_id+")";
+					+topic_name+", "+description+", "+subject_id+");";
 			statement.executeUpdate(query);
 		}
 		catch(SQLException e){
@@ -34,7 +34,7 @@ public class Topics {
 		
 		try{
 			Statement statement = connection.createStatement();
-			String query = "SELECT * FROM BelongedTopics WHERE t_id="+t_id;
+			String query = "SELECT * FROM BelongedTopics WHERE t_id="+t_id+";";
 			ResultSet rs = statement.executeQuery(query);
 			
 			if(rs.next())
@@ -62,7 +62,7 @@ public class Topics {
 		
 		try{
 			Statement statement = connection.createStatement();
-			String query = "SELECT * FROM BelongedConcepts WHERE t_id="+topic_id;
+			String query = "SELECT * FROM BelongedConcepts WHERE t_id="+topic_id+";";
 			ResultSet rs = statement.executeQuery(query);
 			
 			while(rs.next()){
