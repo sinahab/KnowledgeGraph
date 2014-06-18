@@ -4,9 +4,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Concept {
-	int concept_id;
+	private int concept_id;
 	String concept_name;
 	String description;
 	int topic_id;
@@ -59,5 +61,39 @@ public class Concept {
 				}
 		}
 		return topic;
+	}
+	
+	public List<Question> getTiedQuestions(){
+		Connection connection = JdbcSqlConnection.getConnection();
+		List<Question> tied_questions = new ArrayList<Question>();
+		
+		try{
+			Statement statement = connection.createStatement();
+			String query = "SELECT * FROM AskedConceptQuestions WHERE c_id="+concept_id;
+			ResultSet rs = statement.executeQuery(query);
+			
+			while(rs.next()){
+				tied_questions.add(new Question(rs.getNString("text"), rs.getInt("q_id"),
+						rs.getInt("student_number"),rs.getInt("c_id")));
+			}
+		}
+		catch(SQLException e){
+			System.out.println("An error occured while searching!");
+			e.printStackTrace();
+		}
+		finally{
+			if(connection!=null)
+				try{
+					connection.close();
+				}
+				catch(Exception e){
+					e.printStackTrace();
+				}
+		}
+		if(tied_questions.isEmpty())
+			return null;
+		else{
+			return tied_questions;
+			}
 	}
 }

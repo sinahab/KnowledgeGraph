@@ -23,45 +23,26 @@ import com.knowledge.graph.frontend.IndexPage;
 public class QuestionsPanel extends DirectoryPanel {
 	private JPanel user_pane;
 	private Student student;
-	private Question question;
+	private Concept concept;
 
-	public QuestionsPanel(int question_id) {
+	public QuestionsPanel(int concept_id) {
 		super("","");
-		question = Mainpage.getQuestions().searchQuestionByID(question_id);
-		Concept concept = Mainpage.getConcepts().getConceptByID(question.getConcept_ID());
-		this.name = "Question on " + concept.getName();
-		this.description.setText(question.getText());
+		concept = Mainpage.getConcepts().getConceptByID(concept_id);
+		this.name = concept.getName();
+		this.description.setText(concept.getDescription());
 		list = new JList(generateList());
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.setLayoutOrientation(JList.VERTICAL);
-		student = Mainpage.getStudents().searchForStudentBySID(question.getStudent_ID());
-		user_pane = new JPanel();
-		JLabel submitted = new JLabel("Asked by: " + student.getFullName() +
-				" on " + question.getQuestionDate() + "  ");
-		user_pane.add(submitted);
-		JButton add_mentor = new JButton("Add as mentor");
-		add_mentor.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Mainpage.getMentors().addMentor(Mainpage.student.getStudentID(), student.getStudentID());
-			}
-		});
-		user_pane.add(add_mentor);
-		GridBagConstraints constraint = new GridBagConstraints();
-		constraint.gridx = 0; constraint.gridy = 2;
-		constraint.weightx = 1; constraint.weighty = 1;
-		constraint.gridwidth = 1; constraint.gridheight = 1;
-		constraint.anchor = GridBagConstraints.FIRST_LINE_START;
-		add(user_pane, constraint);
 		generateGUI();
 	}
 
 	@Override
 	protected DefaultListModel generateList() {
 		DefaultListModel model = new DefaultListModel();
-		List<Answer> answers = question.getTiedAnswers();
-		if (answers != null) {
-			for (Answer ans : answers) {
-				model.addElement(new NodeWrapper(ans.getText(), ans.getAnswerID()));
+		List<Question> questions = concept.getTiedQuestions();
+		if (questions != null) {
+			for (Question question : questions) {
+				model.addElement(new NodeWrapper(question.getText(), question.getQuestion_ID()));
 			}
 		}
 		return model;
