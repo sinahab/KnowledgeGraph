@@ -1,18 +1,17 @@
 package com.knowledge.graph.frontend.panel;
 
 import java.awt.CardLayout;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JList;
+import javax.swing.ListSelectionModel;
 
 import com.knowledge.graph.Mainpage;
-import com.knowledge.graph.backend.Student;
 import com.knowledge.graph.backend.Subject;
-import com.knowledge.graph.backend.Subjects;
 import com.knowledge.graph.frontend.IndexPage;
 
 public class SubjectsPanel extends DirectoryPanel {
@@ -23,6 +22,10 @@ public class SubjectsPanel extends DirectoryPanel {
 	public SubjectsPanel() {
 		super("Subjects", "This is a list of all subjects");
 		selected_index = -1;
+		list = new JList(generateList());
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		list.setLayoutOrientation(JList.VERTICAL);
+		generateGUI();
 	}
 
 	@Override
@@ -61,6 +64,9 @@ public class SubjectsPanel extends DirectoryPanel {
 				}
 				if (IndexPage.questions_button != null) {
 					IndexPage.nav_bar.remove(IndexPage.questions_button);
+				}
+				if (IndexPage.questions_button != null) {
+					IndexPage.nav_bar.remove(IndexPage.questions_spacer);
 				}
 				IndexPage.nav_bar.revalidate();
 				IndexPage.nav_bar.repaint();

@@ -8,6 +8,8 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.ListSelectionModel;
 
 import com.knowledge.graph.Mainpage;
 import com.knowledge.graph.backend.Subject;
@@ -26,19 +28,24 @@ public class TopicsPanel extends DirectoryPanel {
 		this.subject = Mainpage.getSubjects().getSubjectByID(ID);
 		this.topics = Mainpage.getSubjects().getTiedTopics(this.ID);
 		this.ID = ID;
+		list = new JList(generateList());
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		list.setLayoutOrientation(JList.VERTICAL);
+		generateGUI();
 	}
 
 	@Override
 	protected DefaultListModel generateList() {
-		DefaultListModel model = new DefaultListModel();	
-		
-		for (int i = 0; i < topics.size(); i++ ) {
-			model.addElement( new NodeWrapper(this.topics.get(i).getName(),
-					this.topics.get(i).getTopicID()) );
-		}
 
-		// model.addElement(new NodeWrapper("Algebra", 1));
-		// model.addElement(new NodeWrapper("PDEs", 2));
+		DefaultListModel model = new DefaultListModel();
+		System.out.println(this.ID);
+		
+		List<Topic> topics = Mainpage.getSubjects().getTiedTopics(this.ID);
+		if (topics != null) {
+			for (int i = 0; i < topics.size(); i++ ) {
+				model.addElement( new NodeWrapper(topics.get(i).getName(), topics.get(i).getTopicID()) );
+			}
+		}
 		return model;
 	}
 

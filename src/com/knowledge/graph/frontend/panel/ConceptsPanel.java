@@ -8,6 +8,8 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.ListSelectionModel;
 
 import com.knowledge.graph.Mainpage;
 import com.knowledge.graph.backend.Concept;
@@ -29,6 +31,10 @@ public class ConceptsPanel extends DirectoryPanel {
 		this.topic = Mainpage.getTopics().getTopicByID(ID);
 		this.concepts = Mainpage.getTopics().getTiedConcepts(ID);
 		this.ID = ID;
+		list = new JList(generateList());
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		list.setLayoutOrientation(JList.VERTICAL);
+		generateGUI();
 	}
 
 	@Override
