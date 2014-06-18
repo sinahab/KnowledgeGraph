@@ -106,4 +106,35 @@ public class Mentor extends Student{
 		}
 		return approval_success;
 	}
+	/**
+	 * 
+	 * @param mentor_id
+	 * @param mendee_id
+	 * @return boolean indicating whether a mentorship exists between the 2 given ids
+	 */
+	public boolean isMentoring(int mentor_id, int mentee_id){
+		boolean is_a_mentor = false;
+		Connection connection = JdbcSqlConnection.getConnection();
+		try{
+			Statement statement = connection.createStatement();
+			String query  = "SELECT * FROM Mentors WHERE student_number="+mentor_id+" AND mentored_student="+mentee_id;
+			ResultSet rs = statement.executeQuery(query);
+			if(rs.next())
+				is_a_mentor = true;
+		}
+		catch(SQLException e){
+			System.out.println("An error occured while searching!");
+			e.printStackTrace();
+		}
+		finally{
+			if(connection!=null)
+				try{
+					connection.close();
+				}
+				catch(Exception e){
+					e.printStackTrace();
+				}
+		}
+		return is_a_mentor;
+	}
 }
