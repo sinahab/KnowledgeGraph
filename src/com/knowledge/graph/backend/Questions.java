@@ -13,7 +13,7 @@ public class Questions {
 		boolean success = false;
 		try{
 			String query = "INSERT INTO AskedConceptQuestions (text, student_number, c_id)"
-					+ "VALUES ("+question_text + "," + student_id + "c_id" + ");";
+					+ "VALUES (\""+question_text + "\"," + student_id + "," + c_id + ");";
 			Statement statement = connection.createStatement();
 			int result = statement.executeUpdate(query);
 			if(result==1)
