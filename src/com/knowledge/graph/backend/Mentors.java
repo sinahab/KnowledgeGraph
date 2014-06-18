@@ -10,7 +10,7 @@ public class Mentors {
 		boolean success = false;
 		try{
 			Statement statement = connection.createStatement();
-			String update = "INSERT INTO Mentors(student_number, mentored_student) VALUES("+mentored_id+", "+mentor_id+");";
+			String update = "INSERT INTO Mentors(student_number, mentored_student) VALUES("+mentor_id+", "+mentored_id+");";
 			int result = statement.executeUpdate(update);
 			if(result==1)
 				success=true;

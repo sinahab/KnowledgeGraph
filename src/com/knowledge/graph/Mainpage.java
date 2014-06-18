@@ -84,4 +84,11 @@ public class Mainpage {
 		}
 		return topics;
 	}
+	
+	public static Answers getAnswers() {
+		if (answers == null) {
+			answers = new Answers();
+		}
+		return answers;
+	}
 }
