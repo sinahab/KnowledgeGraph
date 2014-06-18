@@ -24,13 +24,13 @@ public class ConceptsPanel extends DirectoryPanel {
 	private Topic topic;
 	private List<Concept> concepts;
 	
-	public ConceptsPanel(int ID) {
-		super( Mainpage.getTopics().getTopicByID(ID).getName(),
-				Mainpage.getTopics().getTopicByID(ID).getDescription());
-		this.subject = Mainpage.getTopics().getTopicByID(ID).getTiedSubject();
-		this.topic = Mainpage.getTopics().getTopicByID(ID);
-		this.concepts = Mainpage.getTopics().getTiedConcepts(ID);
-		this.ID = ID;
+	public ConceptsPanel(int topic_ID) {
+		super( Mainpage.getTopics().getTopicByID(topic_ID).getName(),
+				Mainpage.getTopics().getTopicByID(topic_ID).getDescription());
+		this.subject = Mainpage.getTopics().getTopicByID(topic_ID).getTiedSubject();
+		this.topic = Mainpage.getTopics().getTopicByID(topic_ID);
+		this.concepts = Mainpage.getTopics().getTiedConcepts(topic_ID);
+		this.ID = topic_ID;
 		list = new JList(generateList());
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.setLayoutOrientation(JList.VERTICAL);
@@ -69,6 +69,14 @@ public class ConceptsPanel extends DirectoryPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				CardLayout cl = (CardLayout) IndexPage.cards.getLayout();
 				cl.show(IndexPage.cards, "Question");
+				if (IndexPage.answers_button != null) {
+					IndexPage.nav_bar.remove(IndexPage.answers_button);
+				}
+				if (IndexPage.answers_spacer != null) {
+					IndexPage.nav_bar.remove(IndexPage.answers_spacer);
+				}
+				IndexPage.nav_bar.revalidate();
+				IndexPage.nav_bar.repaint();
 			}
 		});
 		IndexPage.questions_spacer = new JLabel(" > ");

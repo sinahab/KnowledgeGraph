@@ -8,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -24,6 +23,7 @@ import com.knowledge.graph.Mainpage;
 import com.knowledge.graph.backend.Mentor;
 import com.knowledge.graph.backend.Student;
 import com.knowledge.graph.frontend.panel.AnswerPanel;
+import com.knowledge.graph.frontend.panel.AnswersPanel;
 import com.knowledge.graph.frontend.panel.ConceptsPanel;
 import com.knowledge.graph.frontend.panel.QuestionsPanel;
 import com.knowledge.graph.frontend.panel.SubjectsPanel;
@@ -36,6 +36,7 @@ public class IndexPage extends Page {
 	public static ConceptsPanel concept;
 	public static JPanel cards;
 	public static QuestionsPanel question;
+	public static AnswersPanel answers;
 	public static AnswerPanel answer;
 	
 	// Navbar buttons
@@ -44,6 +45,8 @@ public class IndexPage extends Page {
 	public static JLabel concepts_spacer;
 	public static JButton questions_button;
 	public static JLabel questions_spacer;
+	public static JButton answers_button;
+	public static JLabel answers_spacer;
 
 	public IndexPage() {
 		JPanel background = new JPanel(new BorderLayout());

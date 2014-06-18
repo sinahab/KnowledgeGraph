@@ -68,6 +68,12 @@ public class SubjectsPanel extends DirectoryPanel {
 				if (IndexPage.questions_button != null) {
 					IndexPage.nav_bar.remove(IndexPage.questions_spacer);
 				}
+				if (IndexPage.answers_button != null) {
+					IndexPage.nav_bar.remove(IndexPage.answers_button);
+				}
+				if (IndexPage.answers_spacer != null) {
+					IndexPage.nav_bar.remove(IndexPage.answers_spacer);
+				}
 				IndexPage.nav_bar.revalidate();
 				IndexPage.nav_bar.repaint();
 			}

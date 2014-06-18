@@ -54,12 +54,23 @@ public class QuestionsPanel extends DirectoryPanel {
 		NodeWrapper node = (NodeWrapper)list.getSelectedValue();
 		
 		// Add new card
-		IndexPage.answer = new AnswerPanel(node.getID());
-		IndexPage.cards.add(IndexPage.answer, "Answer");
+		IndexPage.answers = new AnswersPanel(node.getID());
+		IndexPage.cards.add(IndexPage.answers, "Answers");
 		CardLayout c = (CardLayout) IndexPage.cards.getLayout();
-		c.show(IndexPage.cards, "Answer");
+		c.show(IndexPage.cards, "Answers");
 		
-		// No navi button for answer
+		// Add answers navi button
+		IndexPage.answers_button = new JButton(node.getName());
+		IndexPage.answers_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				CardLayout cl = (CardLayout) IndexPage.cards.getLayout();
+				cl.show(IndexPage.cards, "Answers");
+			}
+		});
+		IndexPage.answers_spacer = new JLabel(" > ");
+		IndexPage.nav_bar.add(IndexPage.answers_spacer);
+		IndexPage.nav_bar.add(IndexPage.answers_button);
+		IndexPage.nav_bar.revalidate();		
 	}
 
 	@Override

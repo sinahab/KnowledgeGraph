@@ -22,12 +22,12 @@ public class TopicsPanel extends DirectoryPanel {
 	private Subject subject;
 	private List<Topic> topics;
 	
-	public TopicsPanel(int ID) {
-		super( Mainpage.getSubjects().getSubjectByID(ID).getName(), 
-				Mainpage.getSubjects().getSubjectByID(ID).getDescription());
-		this.subject = Mainpage.getSubjects().getSubjectByID(ID);
+	public TopicsPanel(int subject_ID) {
+		super( Mainpage.getSubjects().getSubjectByID(subject_ID).getName(), 
+				Mainpage.getSubjects().getSubjectByID(subject_ID).getDescription());
+		this.subject = Mainpage.getSubjects().getSubjectByID(subject_ID);
 		this.topics = Mainpage.getSubjects().getTiedTopics(this.ID);
-		this.ID = ID;
+		this.ID = subject_ID;
 		list = new JList(generateList());
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.setLayoutOrientation(JList.VERTICAL);
@@ -71,6 +71,12 @@ public class TopicsPanel extends DirectoryPanel {
 				}
 				if (IndexPage.questions_spacer != null) {
 					IndexPage.nav_bar.remove(IndexPage.questions_spacer);
+				}
+				if (IndexPage.answers_button != null) {
+					IndexPage.nav_bar.remove(IndexPage.answers_button);
+				}
+				if (IndexPage.answers_spacer != null) {
+					IndexPage.nav_bar.remove(IndexPage.answers_spacer);
 				}
 				IndexPage.nav_bar.revalidate();
 				IndexPage.nav_bar.repaint();
