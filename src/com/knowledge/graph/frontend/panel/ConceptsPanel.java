@@ -40,12 +40,12 @@ public class ConceptsPanel extends DirectoryPanel {
 	@Override
 	protected DefaultListModel generateList() {
 		DefaultListModel model = new DefaultListModel();
-		
-		for (int i = 0; i < concepts.size(); i++ ) {
-			model.addElement( new NodeWrapper(this.concepts.get(i).getName(),
-					this.concepts.get(i).getConcept_ID()) );
+		if (this.concepts != null) {
+			for (int i = 0; i < concepts.size(); i++ ) {
+				model.addElement( new NodeWrapper(this.concepts.get(i).getName(),
+						this.concepts.get(i).getConcept_ID()) );
+			}
 		}
-		
 		// model.addElement(new NodeWrapper("Why study Algebra?", 1));
 		//model.addElement(new NodeWrapper("How do I solve x = 1?", 2));
 		
