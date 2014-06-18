@@ -42,4 +42,10 @@ public class QuestionsPanel extends DirectoryPanel {
 		
 		// No navi button for answer
 	}
+
+	@Override
+	protected void addAction() {
+		// TODO Auto-generated method stub
+		
+	}
 }
