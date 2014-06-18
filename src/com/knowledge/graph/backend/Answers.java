@@ -15,7 +15,7 @@ public class Answers {
 			
 			while(rs.next()){
 				tied_answers.add(new Answer(rs.getNString("text"),rs.getInt("student_number"),
-						rs.getInt("q_id"), rs.getNString("status")));
+						rs.getInt("q_id"), rs.getNString("status"), rs.getInt("a_id")));
 			}	
 		}
 		catch(SQLException e){
@@ -47,7 +47,7 @@ public class Answers {
 			ResultSet rs = statement.executeQuery(query);
 			if(rs.next()){
 				answer = new Answer(rs.getNString("text"),rs.getInt("student_number"),
-						rs.getInt("q_id"), rs.getNString("status"));
+						rs.getInt("q_id"), rs.getNString("status"), rs.getInt("a_id"));
 			}
 		}
 		catch(SQLException e){

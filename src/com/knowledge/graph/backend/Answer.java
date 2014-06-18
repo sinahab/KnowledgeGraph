@@ -8,13 +8,16 @@ public class Answer {
 	String text;
 	int student_number;
 	int q_id;
+	int a_id;
+	
 	String status;
 	
-	public Answer(String text, int student_number, int q_id, String status){
+	public Answer(String text, int student_number, int q_id, String status, int a_id){
 		this.text = text;
 		this.student_number = student_number;
 		this.q_id = q_id;
 		this.status = status;
+		this.a_id = a_id;
 	}
 	
 	public int getStudent_number(){
@@ -33,12 +36,16 @@ public class Answer {
 		return text;
 	}
 	
+	public int getAnswerID(){
+		return a_id;
+	}
+	
 	/**
 	 * 
 	 * @param a_id
 	 * @return the creation date for the answer that is identified by its ID. Null if no such answer exists
 	 */
-	public String getAnswerDate(int a_id){
+	public String getAnswerDate(){
 		Connection connection = JdbcSqlConnection.getConnection();
 		String date = null;
 		
@@ -66,7 +73,7 @@ public class Answer {
 		return date;
 	}
 	
-	public Question getTied_Question(int q_id){
+	public Question getTied_Question(){
 		Connection connection = JdbcSqlConnection.getConnection();
 		Question question = null;
 		

@@ -49,7 +49,7 @@ public List<Answer> getTiedAnswers(int q_id){
 			
 			while(rs.next()){
 				tied_answers.add(new Answer(rs.getNString("text"),rs.getInt("student_number"), 
-						rs.getInt("q_id"),rs.getNString("status")));
+						rs.getInt("q_id"),rs.getNString("status"), rs.getInt("a_id")));
 			}
 		}
 		catch(SQLException e){
@@ -76,13 +76,13 @@ public List<Answer> getTiedAnswers(int q_id){
  * @param q_id
  * @return the creation date for the question that is identified by its ID. Null if no such answer exists
  */
-	public String getQuestionDate(int q_id){
+	public String getQuestionDate(){
 		Connection connection = JdbcSqlConnection.getConnection();
 		String date = null;
 	
 		try{
 			Statement statement = connection.createStatement();
-			String query = "SELECT create_date FROM AskedConceptQuestions WHERE q_id="+q_id;
+			String query = "SELECT create_date FROM AskedConceptQuestions WHERE q_id="+question_id;
 		
 			ResultSet rs = statement.executeQuery(query);
 			if(rs.next())
