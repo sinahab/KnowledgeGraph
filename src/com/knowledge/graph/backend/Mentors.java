@@ -97,8 +97,8 @@ public class Mentors {
 			Statement statement = connection.createStatement();
 			ResultSet rs = statement.executeQuery(query);
 			if(rs.next()){
-				mentor = new Mentor(rs.getInt("mentored_student"), rs.getNString("first_name"), rs.getNString("last_name"), rs.getNString("degree"),
-						rs.getNString("password"), mentor_sid);
+				mentor = new Mentor(mentor_sid, rs.getNString("first_name"), rs.getNString("last_name"), rs.getNString("degree"),
+						rs.getNString("password"),rs.getInt("mentored_student"));
 			}
 		}
 		catch(SQLException e){
