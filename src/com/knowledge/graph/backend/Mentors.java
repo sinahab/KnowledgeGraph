@@ -89,5 +89,34 @@ public class Mentors {
 		return approval_success;
 	}
 	
+	public Mentor getMentorByID(int mentor_sid){
+		Mentor mentor = null;
+		Connection connection = JdbcSqlConnection.getConnection();
+		try{
+			String query = "SELECT DISTINCT s.*, m.mentored_student FROM Mentors m, Students s WHERE m.student_number = " + mentor_sid + "AND s.student_number = m.student_number;";
+			Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery(query);
+			if(rs.next()){
+				mentor = new Mentor(rs.getInt("mentored_student"), rs.getNString("first_name"), rs.getNString("last_name"), rs.getNString("degree"),
+						rs.getNString("password"), mentor_sid);
+			}
+		}
+		catch(SQLException e){
+			System.out.println("An error occured while searching!");
+			e.printStackTrace();
+		}
+		finally{
+			if(connection!=null)
+				try{
+					connection.close();
+				}
+				catch(Exception e){
+					e.printStackTrace();
+				}
+		}
+		return mentor;
+	}
+
+	
 	
 }
