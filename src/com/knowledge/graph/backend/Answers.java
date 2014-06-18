@@ -15,7 +15,7 @@ public class Answers {
 			
 			while(rs.next()){
 				tied_answers.add(new Answer(rs.getNString("text"),rs.getInt("student_number"),
-						rs.getInt("q_id"), rs.getNString("status")));
+						rs.getInt("q_id"), rs.getNString("status"), rs.getInt("a_id")));
 			}	
 		}
 		catch(SQLException e){
@@ -47,7 +47,7 @@ public class Answers {
 			ResultSet rs = statement.executeQuery(query);
 			if(rs.next()){
 				answer = new Answer(rs.getNString("text"),rs.getInt("student_number"),
-						rs.getInt("q_id"), rs.getNString("status"));
+						rs.getInt("q_id"), rs.getNString("status"), rs.getInt("a_id"));
 			}
 		}
 		catch(SQLException e){
@@ -94,17 +94,17 @@ public class Answers {
 		return success;
 	}
 	
-	public Question getTied_Question(int q_id){
+	public List<Integer> getUnapprovedMenteeAnswersByMentorID(int mentor_id ){
 		Connection connection = JdbcSqlConnection.getConnection();
-		Question question = null;
-		
+		List<Integer> unapproved_answers = new ArrayList<Integer>();
 		try{
+			String query = "SELECT a.* FROM TiedAnswers a, Mentors m WHERE a.student_number=m.mentored_student AND a.status<>\"approved\""
+					+ " AND m.student_number="+mentor_id;
 			Statement statement = connection.createStatement();
-			String query = "SELECT * FROM AskedConceptQuestions WHERE q_id="+q_id;
 			ResultSet rs = statement.executeQuery(query);
-			rs.next();
-			question = new Question(rs.getNString("text"), rs.getInt("q_id"), rs.getInt("student_number"),
-												rs.getInt("c_id"));
+			while(rs.next()){
+				unapproved_answers.add(new Integer(rs.getInt("a_id")));
+			}	
 		}
 		catch(SQLException e){
 			System.out.println("An error occured while searching!");
@@ -119,40 +119,13 @@ public class Answers {
 					e.printStackTrace();
 				}
 		}
-		return question;
+		if(unapproved_answers.isEmpty())
+			return null;
+		else{
+			return unapproved_answers;
+		}
 	}
-	/**
-	 * 
-	 * @param a_id
-	 * @return the creation date for the answer that is identified by its ID. Null if no such answer exists
-	 */
-	public String getAnswerDate(int a_id){
-		Connection connection = JdbcSqlConnection.getConnection();
-		String date = null;
-		
-		try{
-			Statement statement = connection.createStatement();
-			String query = "SELECT create_date FROM TiedAnswers WHERE a_id="+a_id;
-			
-			ResultSet rs = statement.executeQuery(query);
-			if(rs.next())
-				date = rs.getNString("create_date");
-		}
-		catch(SQLException e){
-			System.out.println("An error occured while searching!");
-			e.printStackTrace();
-		}
-		finally{
-			if(connection!=null)
-				try{
-					connection.close();
-				}
-				catch(Exception e){
-					e.printStackTrace();
-				}
-		}
-		return date;
-	}
+	
 	
 	
 }
