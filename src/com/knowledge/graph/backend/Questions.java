@@ -81,7 +81,11 @@ public class Questions {
 					e.printStackTrace(); //Placeholder, will modify later
 				}
 		}
-		return q_list;
+		if(q_list.isEmpty())
+			return null;
+		else{
+			return q_list;
+			}
 	}//end searchQuestionsBySID
 	
 	public List<Answer> getTiedAnswers(int q_id){
@@ -110,7 +114,11 @@ public class Questions {
 					e.printStackTrace();
 				}
 		}
-		return tied_answers;
+		if(tied_answers.isEmpty())
+			return null;
+		else{
+			return tied_answers;
+			}
 	}//end getTiedAnswers
 	
 	/**
@@ -147,7 +155,11 @@ public class Questions {
 					e.printStackTrace();
 				}
 		}
-		return students;
+		if(students.isEmpty())
+			return null;
+		else{
+			return students;
+			}
 	}//end getStudentEveryConcept
 	
 	public List<Student> getAskedMostQuestions(){
@@ -183,7 +195,11 @@ public class Questions {
 					e.printStackTrace();
 				}
 		}
-		return students;
+		if(students.isEmpty())
+			return null;
+		else{
+			return students;
+			}
 	}
 	
 	public List<Student> getAskedLeastQuestions(){
@@ -219,7 +235,11 @@ public class Questions {
 					e.printStackTrace();
 				}
 		}
-		return students;
+		if(students.isEmpty())
+			return null;
+		else{
+			return students;
+			}
 	}
 	
 	public List<Question> findMostRecentQuestion(){
@@ -250,7 +270,11 @@ public class Questions {
 					e.printStackTrace();
 				}
 		}
-		return questions;
+		if(questions.isEmpty())
+			return null;
+		else{
+			return questions;
+			}
 	}
 	
 	

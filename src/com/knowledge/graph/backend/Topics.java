@@ -31,7 +31,11 @@ public class Topics {
 					e.printStackTrace();
 				}
 		}
-		return tied_concepts;
+		if(tied_concepts.isEmpty())
+			return null;
+		else{
+			return tied_concepts;
+			}
 	}
 	
 	public Topic getTopicByID(int t_id){

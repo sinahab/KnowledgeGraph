@@ -37,7 +37,7 @@ public class Subjects {
 			statement.executeUpdate(query);
 		}
 		catch(SQLException e){
-			System.out.println("An error occured while updating!");
+			System.out.println("An error occured while updating or the subject doesn't exist!");
 			e.printStackTrace();
 		}
 		finally{
@@ -77,7 +77,11 @@ public class Subjects {
 					e.printStackTrace();
 				}
 		}
-		return tied_topics;
+		if(tied_topics.isEmpty())
+			return null;
+		else{
+			return tied_topics;
+			}
 	}
 	
 }
