@@ -21,14 +21,12 @@ public class ConceptsPanel extends DirectoryPanel {
 
 	private Subject subject;
 	private Topic topic;
-	private List<Concept> concepts;
 	
 	public ConceptsPanel(int topic_ID) {
 		super( Mainpage.getTopics().getTopicByID(topic_ID).getName(),
 				Mainpage.getTopics().getTopicByID(topic_ID).getDescription());
 		this.subject = Mainpage.getTopics().getTopicByID(topic_ID).getTiedSubject();
 		this.topic = Mainpage.getTopics().getTopicByID(topic_ID);
-		this.concepts = Mainpage.getTopics().getTiedConcepts(topic_ID);
 		this.ID = topic_ID;
 		list = new JList(generateList());
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -41,14 +39,12 @@ public class ConceptsPanel extends DirectoryPanel {
 	@Override
 	protected DefaultListModel generateList() {
 		DefaultListModel model = new DefaultListModel();
-		if (this.concepts != null) {
-			for (int i = 0; i < concepts.size(); i++ ) {
-				model.addElement( new NodeWrapper(this.concepts.get(i).getName(),
-						this.concepts.get(i).getConcept_ID()) );
+		List<Concept> concepts = Mainpage.getTopics().getTiedConcepts(topic.getTopicID());
+		if (concepts != null) {
+			for (Concept concept : concepts) {
+				model.addElement( new NodeWrapper(concept.getName(), concept.getConcept_ID()));
 			}
 		}
-		// model.addElement(new NodeWrapper("Why study Algebra?", 1));
-		//model.addElement(new NodeWrapper("How do I solve x = 1?", 2));
 		
 		return model;
 	}

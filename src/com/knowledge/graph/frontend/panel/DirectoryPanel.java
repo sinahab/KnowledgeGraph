@@ -26,7 +26,7 @@ public abstract class DirectoryPanel extends JPanel {
 	protected JFormattedTextField add_field;
 	protected JButton go_button;
 	protected JButton delete_button;
-	public JList list;
+	protected JList list;
 	protected int ID;
 	
 	public DirectoryPanel(String name, String description) {
@@ -115,7 +115,7 @@ public abstract class DirectoryPanel extends JPanel {
 	
 	protected void redrawMeatPanel() {
 		// Refresh display
-		remove(scroll);
+		this.remove(scroll);
 		GridBagConstraints constraint = new GridBagConstraints();
 		list = new JList(generateList());
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -126,7 +126,7 @@ public abstract class DirectoryPanel extends JPanel {
 		constraint.weightx = 2; constraint.weighty = 10;
 		constraint.gridwidth = 2;
 		constraint.anchor = GridBagConstraints.FIRST_LINE_START;
-		add(scroll, constraint);
+		this.add(scroll, constraint);
 		add_name.setText("");
 		add_field.setText("");
 		revalidate();
