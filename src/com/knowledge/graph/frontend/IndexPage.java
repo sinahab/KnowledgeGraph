@@ -150,7 +150,6 @@ public class IndexPage extends Page {
 		List<Student> student_mentees = mentor.getMentees();
 
 		if ( mentor.getMentees() != null) {
-			
 			for ( Student mentee : mentor.getMentees() ) {
 				mentees.add(new DefaultMutableTreeNode( mentee.getFullName()) );
 			}
