@@ -70,7 +70,7 @@ public abstract class DirectoryPanel extends JPanel {
 		
 		// Add Scrollpane and list
 		JScrollPane scroll = new JScrollPane(list);
-		scroll.setPreferredSize(new Dimension(500, 300));
+		scroll.setPreferredSize(new Dimension(500, 200));
 		constraint.gridx = 0; constraint.gridy = 3;
 		constraint.weightx = 2; constraint.weighty = 10;
 		constraint.gridwidth = 2;
@@ -79,7 +79,7 @@ public abstract class DirectoryPanel extends JPanel {
 		
 		// Add new entry field
 		add_field = new JFormattedTextField();
-		add_field.setPreferredSize(new Dimension(400,100));
+		add_field.setPreferredSize(new Dimension(400,50));
 		constraint.gridx = 0; constraint.gridy = 4;
 		constraint.weightx = 5; constraint.weighty = 1;
 		constraint.gridwidth = 1;
