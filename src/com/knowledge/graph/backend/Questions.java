@@ -221,7 +221,7 @@ public class Questions {
 		
 		try{
 			Statement statement = connection.createStatement();
-			String subquery = "(SELECT MIN(create_date) FROM AskedConceptQuestions)";
+			String subquery = "(SELECT MAX(create_date) FROM AskedConceptQuestions)";
 			String query = "SELECT * FROM AskedConceptQuestions WHERE create_date= "+subquery;
 			ResultSet rs = statement.executeQuery(query);
 			
