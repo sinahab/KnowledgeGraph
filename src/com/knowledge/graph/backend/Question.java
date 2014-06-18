@@ -86,7 +86,7 @@ public List<Answer> getTiedAnswers(int q_id){
 		
 			ResultSet rs = statement.executeQuery(query);
 			if(rs.next())
-				date = rs.getNString("create_date");
+				date = rs.getDate("create_date").toString();
 		}
 		catch(SQLException e){
 			System.out.println("An error occured while searching!");
