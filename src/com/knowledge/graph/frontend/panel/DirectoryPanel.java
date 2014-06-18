@@ -20,7 +20,9 @@ import javax.swing.border.EtchedBorder;
 public abstract class DirectoryPanel extends JPanel {
 	public String name;
 	protected JLabel description;
+	protected JScrollPane scroll;
 	protected JButton add_button;
+	protected JFormattedTextField add_name; // Name of new field added
 	protected JFormattedTextField add_field;
 	protected JButton go_button;
 	public JList list;
@@ -33,17 +35,24 @@ public abstract class DirectoryPanel extends JPanel {
 				BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), name));
 		this.description.setPreferredSize(new Dimension(500,50));
 		add_button = new JButton("Add New");
+		add_button.setPreferredSize(new Dimension(100,100));
 		add_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				addAction();
 			}
 		});
 		go_button = new JButton("Go");
+		go_button.setPreferredSize(new Dimension(100,20));
 		go_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				goAction();
 			}
 		});
+
+		add_name = new JFormattedTextField();
+		add_name.setPreferredSize(new Dimension(400,20));
+		add_field = new JFormattedTextField();
+		add_field.setPreferredSize(new Dimension(400,50));
 		
 	}
 	
@@ -65,7 +74,7 @@ public abstract class DirectoryPanel extends JPanel {
 		add(go_button, constraint);
 		
 		// Add Scrollpane and list
-		JScrollPane scroll = new JScrollPane(list);
+	    scroll = new JScrollPane(list);
 		scroll.setPreferredSize(new Dimension(500, 200));
 		constraint.gridx = 0; constraint.gridy = 3;
 		constraint.weightx = 2; constraint.weighty = 10;
@@ -74,15 +83,16 @@ public abstract class DirectoryPanel extends JPanel {
 		add(scroll, constraint);
 		
 		// Add new entry field
-		add_field = new JFormattedTextField();
-		add_field.setPreferredSize(new Dimension(400,50));
 		constraint.gridx = 0; constraint.gridy = 4;
 		constraint.weightx = 5; constraint.weighty = 1;
 		constraint.gridwidth = 1;
 		constraint.anchor = GridBagConstraints.LINE_START;
+		add(add_name, constraint);
+		constraint.gridy = 5;
 		add(add_field, constraint);
-		constraint.gridx = 1;
+		constraint.gridx = 1; constraint.gridy = 4;
 		constraint.weightx = 1;
+		constraint.gridheight = 2;
 		add(add_button, constraint);
 		
 	}

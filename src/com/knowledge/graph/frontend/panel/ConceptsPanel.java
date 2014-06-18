@@ -1,6 +1,8 @@
 package com.knowledge.graph.frontend.panel;
 
 import java.awt.CardLayout;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -9,6 +11,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
 import com.knowledge.graph.Mainpage;
@@ -34,6 +37,8 @@ public class ConceptsPanel extends DirectoryPanel {
 		list = new JList(generateList());
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.setLayoutOrientation(JList.VERTICAL);
+		add_name.setToolTipText("Name of new concept");
+		add_field.setToolTipText("Description of new concept");
 		generateGUI();
 	}
 
@@ -87,7 +92,27 @@ public class ConceptsPanel extends DirectoryPanel {
 
 	@Override
 	protected void addAction() {
-		// TODO Auto-generated method stub
+		// Adds a new subject to the list of subjects
+		String title = add_name.getText();
+		String body = add_field.getText();
+		Mainpage.getConcepts().addConcept(topic.getTopicID(), title, body);
 		
+		// Refresh display
+		remove(scroll);
+		GridBagConstraints constraint = new GridBagConstraints();
+		list = new JList(generateList());
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		list.setLayoutOrientation(JList.VERTICAL);
+		scroll = new JScrollPane(list);
+		scroll.setPreferredSize(new Dimension(500, 200));
+		constraint.gridx = 0; constraint.gridy = 3;
+		constraint.weightx = 2; constraint.weighty = 10;
+		constraint.gridwidth = 2;
+		constraint.anchor = GridBagConstraints.FIRST_LINE_START;
+		add(scroll, constraint);
+		add_name.setText("");
+		add_field.setText("");
+		revalidate();
+		repaint();
 	}
 }

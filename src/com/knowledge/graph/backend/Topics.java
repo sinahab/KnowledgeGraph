@@ -9,8 +9,8 @@ public class Topics {
 		
 		try{
 			Statement statement = connection.createStatement();
-			String query = "INSERT INTO BelongedTopics(t_name, description, s_id) VALUES ("
-					+topic_name+", "+description+", "+subject_id+");";
+			String query = "INSERT INTO BelongedTopics(t_name, description, s_id) VALUES (\""
+					+topic_name+"\", \""+description+"\", "+subject_id+");";
 			statement.executeUpdate(query);
 		}
 		catch(SQLException e){

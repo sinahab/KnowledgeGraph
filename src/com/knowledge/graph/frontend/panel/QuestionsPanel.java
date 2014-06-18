@@ -1,6 +1,7 @@
 package com.knowledge.graph.frontend.panel;
 
 import java.awt.CardLayout;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
 import com.knowledge.graph.Mainpage;
@@ -34,6 +36,7 @@ public class QuestionsPanel extends DirectoryPanel {
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.setLayoutOrientation(JList.VERTICAL);
 		generateGUI();
+		add_name.setVisible(false);
 	}
 
 	@Override
@@ -75,8 +78,28 @@ public class QuestionsPanel extends DirectoryPanel {
 
 	@Override
 	protected void addAction() {
-		// TODO Auto-generated method stub
+		// Adds a new subject to the list of subjects
+		String title = add_name.getText();
+		String body = add_field.getText();
+		Mainpage.getQuestions().addQuestion(body, student.getStudentID(), concept.getConcept_ID());
 		
+		// Refresh display
+		remove(scroll);
+		GridBagConstraints constraint = new GridBagConstraints();
+		list = new JList(generateList());
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		list.setLayoutOrientation(JList.VERTICAL);
+		scroll = new JScrollPane(list);
+		scroll.setPreferredSize(new Dimension(500, 200));
+		constraint.gridx = 0; constraint.gridy = 3;
+		constraint.weightx = 2; constraint.weighty = 10;
+		constraint.gridwidth = 2;
+		constraint.anchor = GridBagConstraints.FIRST_LINE_START;
+		add(scroll, constraint);
+		add_name.setText("");
+		add_field.setText("");
+		revalidate();
+		repaint();
 	}
 
 }
