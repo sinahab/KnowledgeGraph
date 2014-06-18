@@ -3,25 +3,46 @@ package com.knowledge.graph.frontend.panel;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
+import com.knowledge.graph.Mainpage;
+import com.knowledge.graph.backend.Concept;
+import com.knowledge.graph.backend.Concepts;
+import com.knowledge.graph.backend.Subject;
+import com.knowledge.graph.backend.Topic;
 import com.knowledge.graph.frontend.IndexPage;
 
 public class ConceptsPanel extends DirectoryPanel {
 
+	private Subject subject;
+	private Topic topic;
+	private List<Concept> concepts;
+	
 	public ConceptsPanel(int ID) {
-		super("Concept", "Algebra is such a fun concept!");
+		super( Mainpage.getTopics().getTopicByID(ID).getName(),
+				Mainpage.getTopics().getTopicByID(ID).getDescription());
+		this.subject = Mainpage.getTopics().getTopicByID(ID).getTiedSubject();
+		this.topic = Mainpage.getTopics().getTopicByID(ID);
+		this.concepts = Mainpage.getTopics().getTiedConcepts(ID);
 		this.ID = ID;
 	}
 
 	@Override
 	protected DefaultListModel generateList() {
 		DefaultListModel model = new DefaultListModel();
-		model.addElement(new NodeWrapper("Why study Algebra?", 1));
-		model.addElement(new NodeWrapper("How do I solve x = 1?", 2));
+		
+		for (int i = 0; i < concepts.size(); i++ ) {
+			model.addElement( new NodeWrapper(this.concepts.get(i).getName(),
+					this.concepts.get(i).getConcept_ID()) );
+		}
+		
+		// model.addElement(new NodeWrapper("Why study Algebra?", 1));
+		//model.addElement(new NodeWrapper("How do I solve x = 1?", 2));
+		
 		return model;
 	}
 

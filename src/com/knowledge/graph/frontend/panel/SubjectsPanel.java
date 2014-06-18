@@ -18,6 +18,7 @@ import com.knowledge.graph.frontend.IndexPage;
 public class SubjectsPanel extends DirectoryPanel {
 	// Subject panels displays all subjects thus has no ID
 	private int selected_index;
+	private List<Subject> subjects;
 	
 	public SubjectsPanel() {
 		super("Subjects", "This is a list of all subjects");
@@ -27,9 +28,10 @@ public class SubjectsPanel extends DirectoryPanel {
 	@Override
 	protected DefaultListModel generateList() {
 		DefaultListModel list = new DefaultListModel();
-		List<Subject> allSubjects = Mainpage.getSubjects().getAllSubjects();
-		for (int i = 0; i < allSubjects.size(); i++ ) {
-			list.addElement(new NodeWrapper(allSubjects.get(i).getName(), allSubjects.get(i).getID()));
+		this.subjects = Mainpage.getSubjects().getAllSubjects();
+		for (int i = 0; i < this.subjects.size(); i++ ) {
+			list.addElement(new NodeWrapper(this.subjects.get(i).getName(),
+					this.subjects.get(i).getID()));
 		}
 		return list;
 	}

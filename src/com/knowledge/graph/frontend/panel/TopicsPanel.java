@@ -18,23 +18,23 @@ import com.knowledge.graph.frontend.IndexPage;
 public class TopicsPanel extends DirectoryPanel {
 	
 	private Subject subject;
+	private List<Topic> topics;
 	
 	public TopicsPanel(int ID) {
 		super( Mainpage.getSubjects().getSubjectByID(ID).getName(), 
 				Mainpage.getSubjects().getSubjectByID(ID).getDescription());
 		this.subject = Mainpage.getSubjects().getSubjectByID(ID);
+		this.topics = Mainpage.getSubjects().getTiedTopics(this.ID);
 		this.ID = ID;
 	}
 
 	@Override
 	protected DefaultListModel generateList() {
-		DefaultListModel model = new DefaultListModel();
-		System.out.println(this.ID);
-		
-		List<Topic> topics = Mainpage.getSubjects().getTiedTopics(this.ID);
+		DefaultListModel model = new DefaultListModel();	
 		
 		for (int i = 0; i < topics.size(); i++ ) {
-			model.addElement( new NodeWrapper(topics.get(i).getName(), topics.get(i).getTopicID()) );
+			model.addElement( new NodeWrapper(this.topics.get(i).getName(),
+					this.topics.get(i).getTopicID()) );
 		}
 
 		// model.addElement(new NodeWrapper("Algebra", 1));
