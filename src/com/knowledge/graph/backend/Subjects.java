@@ -9,8 +9,8 @@ public class Subjects {
 		
 		try{
 			Statement statement = connection.createStatement();
-			String query = "INSERT INTO Subjects(s_name, description) VALUES ("+subject_name+", "+description
-					+")";
+			String query = "INSERT INTO Subjects(s_name, description) VALUES (\""+subject_name+"\", \""+description
+					+"\")";
 			statement.executeUpdate(query);
 		}
 		catch(SQLException e){
@@ -28,13 +28,15 @@ public class Subjects {
 		}
 	}
 	
-	public void updateDescriptionWithSID(String new_description, int s_id){
-		
+	public boolean updateDescriptionWithSID(String new_description, int s_id){
+		boolean success = false;
 		Connection connection = JdbcSqlConnection.getConnection();
 		try{
 			Statement statement = connection.createStatement();
-			String query = "UPDATE Subjects SET description="+new_description+" WHERE s_id="+s_id;
-			statement.executeUpdate(query);
+			String update = "UPDATE Subjects SET description=\""+new_description+"\" WHERE s_id="+s_id;
+			int result  = statement.executeUpdate(update);
+			if(result==1)
+				success = true;
 		}
 		catch(SQLException e){
 			System.out.println("An error occured while updating or the subject doesn't exist!");
@@ -49,6 +51,7 @@ public class Subjects {
 					e.printStackTrace();
 				}
 		}
+		return success;
 	}//end updateDescriptionWithSID
 	
 	public List<Topic> getTiedTopics(int subject_id){

@@ -10,7 +10,7 @@ public class Concepts {
 		try{
 			Statement statement = connection.createStatement();
 			String update = "INSERT INTO BelongedConcepts( t_id, c_name, description) VALUES ("+
-							topic_id+", "+concept_name+", "+description+");";
+							topic_id+", \""+concept_name+"\", \""+description+"\");";
 			int result = statement.executeUpdate(update);
 			if(result==1)
 				success=true;

@@ -4,15 +4,18 @@ import java.sql.*;
 
 public class Students {
 
-	public void addStudent(String first_name, String last_name, String degree, 
+	public boolean addStudent(String first_name, String last_name, String degree, 
 			int student_ID, String password){
-		
+		boolean success = false;
 		Connection connection = JdbcSqlConnection.getConnection();
 		try{
-			String query = "INSERT INTO Students (student_number, first_name, last_name, degree, password )"
-							+ "VALUES ("+ student_ID+", "+first_name+", "+last_name+", "+degree+","+password+");";
+			String update = "INSERT INTO Students (student_number, first_name, last_name, degree, password )"
+							+ "VALUES ("+ student_ID+", \""+first_name+"\", \""+last_name+"\", \""+degree+"\",\""+password+"\");";
 			Statement statement = connection.createStatement();
-			statement.executeUpdate(query);
+			int result  = statement.executeUpdate(update);
+			if(result==1)
+				success = true;
+			
 		}
 		catch(SQLException e){
 			System.out.println("Insertion of student was unsuccesful!");
@@ -27,16 +30,19 @@ public class Students {
 				}
 			}
 		}	
+		return success;
 	}//end addStudent
 	
-	public void deleteStudentByID(int student_id){
+	public boolean deleteStudentByID(int student_id){
 		
 		Connection connection = JdbcSqlConnection.getConnection();
-		
+		boolean success=false;
 		try{
-			String query = "DELETE FROM Students WHERE student_number = " + student_id+";";
+			String update = "DELETE FROM Students WHERE student_number = " + student_id+";";
 			Statement statement = connection.createStatement();
-			statement.executeUpdate(query);
+			int result = statement.executeUpdate(update);
+			if(result==1)
+				success = true;
 		}
 		catch(SQLException e){
 			System.out.println("Deletion was unsuccesful!");
@@ -51,6 +57,7 @@ public class Students {
 					e.printStackTrace();
 				}
 		}
+		return success;
 	}//end deleteStudentByID
 	
 	public Student searchForStudentBySID(int sid){

@@ -71,7 +71,7 @@ public class Answers {
 		Connection connection = JdbcSqlConnection.getConnection();
 		try{
 			Statement statement = connection.createStatement();
-			String status = "pending";
+			String status = "\"pending\"";
 			String update = "INSERT INTO TiedAnswers( text, q_id, status, student_number) VALUES ("+
 							text+", "+q_id+", "+status+", "+student_number+");";
 			int result = statement.executeUpdate(update);

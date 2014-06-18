@@ -51,15 +51,10 @@ public class Test {
 				System.out.println(a1.getStudentID()+"\n");
 			}
 		}
+	
 		System.out.println("-------------------------------TEST 4-------------------------------------");
-		Students s = new Students();
-		Student student = s.searchForStudentBySID(19392125);
-		System.out.println(student.getFullName()+"\n");
-		
-		System.out.println("-------------------------------TEST 4-------------------------------------");
-		Answers a = new Answers();
-		Answer answer = a.getAnswerByA_ID(99);
-		
+		Students s1 = new Students();
+		s1.addStudent("Bob marley", "Jok", "Fail", 55565556, "123456");
 	}
 
 }
