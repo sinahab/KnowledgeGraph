@@ -81,10 +81,10 @@ public class Mentor extends Student{
 		Connection connection = JdbcSqlConnection.getConnection();
 		try{
 			Statement statement = connection.createStatement();
-			String update = "INSERT INTO MentorApproves(a_id, student_number) VALUES("+answer_id+", "+mentor_id+");";
+			String update  = "UPDATE TiedAnswers SET status= 'approved' WHERE a_id="+answer_id+";";		
 			int success = statement.executeUpdate(update);
 			if(success==1){
-				update = "UPDATE TiedAnswers SET status=approved WHERE a_id"+answer_id+";";
+				update = "INSERT INTO MentorApproves(a_id, student_number) VALUES("+answer_id+", "+mentor_id+");";
 				success = statement.executeUpdate(update);
 				//Check whether the approval was succesful
 				if(success==1)
