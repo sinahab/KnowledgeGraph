@@ -65,7 +65,7 @@ public class Concepts {
 		
 		try{
 			Statement statement = connection.createStatement();
-			String update = "DELETE FROM Subjects WHERE c_id="+concept_id;
+			String update = "DELETE FROM BelongedConcepts WHERE c_id="+concept_id;
 			int result = statement.executeUpdate(update);
 			if(result==1)
 				success = true;
