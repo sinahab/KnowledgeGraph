@@ -128,17 +128,22 @@ public class Mentors {
 			String query  = "SELECT student_number FROM MentorApproves  WHERE a_id="+a_id+";";
 			ResultSet rs = statement.executeQuery(query);
 			
+			List<Integer> IDs = new ArrayList<Integer>();
 			while(rs.next()){
-				int mentor_id = rs.getInt("student_number");
-				//Extract mentor tuples and their mentees ID using the mentor's student number 
-				String query2 = "SELECT s.*, m.mentored_student FROM Mentors m, Students s WHERE m.student_number="+mentor_id
-						+" AND s.student_number=m.student_number;";
-				ResultSet rs2 = statement.executeQuery(query2);
-				if(rs2.next()){
-					mentors.add( new Mentor(mentor_id, rs2.getNString("first_name"), rs2.getNString("last_name"), rs2.getNString("degree"),
-						rs2.getNString("password"),rs2.getInt("mentored_student")));
-				}
+				//Store the id of mentors in a list
+				IDs.add(new Integer(rs.getInt("student_number")));
 			}
+			Iterator<Integer> iterate = IDs.iterator();
+			while(iterate.hasNext()){
+				int ID = iterate.next().intValue();
+				String query2 = "SELECT s.*, m.mentored_student FROM Students s, Mentors m WHERE m.student_number="+ID
+						+" AND m.student_number=s.student_number;";
+				rs = statement.executeQuery(query2);
+				if(rs.next())
+					mentors.add(new Mentor(ID, rs.getNString("first_name"), rs.getNString("last_name"), rs.getNString("degree"),
+						rs.getNString("password"),rs.getInt("mentored_student")));
+			}
+			
 		}
 		catch(SQLException e){
 			System.out.println("An error occured while searching!");
