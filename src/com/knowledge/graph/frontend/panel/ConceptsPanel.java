@@ -103,21 +103,6 @@ public class ConceptsPanel extends DirectoryPanel {
 		Mainpage.getConcepts().addConcept(topic.getTopicID(), title, body);
 		
 		// Refresh display
-		remove(scroll);
-		GridBagConstraints constraint = new GridBagConstraints();
-		list = new JList(generateList());
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		list.setLayoutOrientation(JList.VERTICAL);
-		scroll = new JScrollPane(list);
-		scroll.setPreferredSize(new Dimension(500, 200));
-		constraint.gridx = 0; constraint.gridy = 3;
-		constraint.weightx = 2; constraint.weighty = 10;
-		constraint.gridwidth = 2;
-		constraint.anchor = GridBagConstraints.FIRST_LINE_START;
-		add(scroll, constraint);
-		add_name.setText("");
-		add_field.setText("");
-		revalidate();
-		repaint();
+		redrawMeatPanel();
 	}
 }
