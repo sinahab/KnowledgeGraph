@@ -38,6 +38,62 @@ public class Answers {
 			}
 	}// end getAnswerBySID
 	
+	public Answer getAnswerByA_ID(int a_id){
+		Connection connection = JdbcSqlConnection.getConnection();
+		Answer answer = null;
+		try{
+			Statement statement = connection.createStatement();
+			String query = "SELECT * FROM TiedAnswers WHERE a_id="+a_id;
+			ResultSet rs = statement.executeQuery(query);
+			if(rs.next()){
+				answer = new Answer(rs.getNString("text"),rs.getInt("student_number"),
+						rs.getInt("q_id"), rs.getNString("status"));
+			}
+		}
+		catch(SQLException e){
+			System.out.println("An error occured while searching!");
+			e.printStackTrace();
+		}
+		finally{
+			if(connection!=null)
+				try{
+					connection.close();
+				}
+				catch(Exception e){
+					e.printStackTrace();
+				}
+		}
+		return answer;
+	}
+	
+	public boolean addAnswer(int q_id, String text, int student_number){
+		boolean success = false;
+		Connection connection = JdbcSqlConnection.getConnection();
+		try{
+			Statement statement = connection.createStatement();
+			String status = "pending";
+			String update = "INSERT INTO TiedAnswers( text, q_id, status, student_number) VALUES ("+
+							text+", "+q_id+", "+status+", "+student_number+");";
+			int result = statement.executeUpdate(update);
+			if(result==1)
+				success=true;
+		}
+		catch(SQLException e){
+			System.out.println("An error occured while updating!");
+			e.printStackTrace();
+		}
+		finally{
+			if(connection!=null)
+				try{
+					connection.close();
+				}
+				catch(Exception e){
+					e.printStackTrace();
+				}
+		}
+		return success;
+	}
+	
 	public Question getTied_Question(int q_id){
 		Connection connection = JdbcSqlConnection.getConnection();
 		Question question = null;
