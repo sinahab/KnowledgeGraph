@@ -139,7 +139,7 @@ public class IndexPage extends Page {
 	    return sdf.format(cal.getTime());
 	}
 	
-	private void populate_users(DefaultMutableTreeNode users) {
+	private static void populate_users(DefaultMutableTreeNode users) {
 		DefaultMutableTreeNode mentors = new DefaultMutableTreeNode("Mentors");
 		users.add(mentors);
 		DefaultMutableTreeNode mentees = new DefaultMutableTreeNode("Mentees");
@@ -163,6 +163,16 @@ public class IndexPage extends Page {
 	}
 	
 	public static void redrawUserPane() {
+		DefaultMutableTreeNode users = new DefaultMutableTreeNode("Users");
+	    IndexPage.populate_users(users);
+	    
+		JTree user_tree = new JTree(users);
+		background.remove(user_pane);
+		user_pane = new JScrollPane(user_tree);
+		user_pane.setPreferredSize(new Dimension(150,20));
 		
+		background.add(user_pane, BorderLayout.LINE_END);
+		background.getParent().revalidate();
+		background.getParent().repaint();
 	}
 }

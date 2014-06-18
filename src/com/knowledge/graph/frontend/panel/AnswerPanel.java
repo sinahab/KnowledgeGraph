@@ -17,6 +17,7 @@ import com.knowledge.graph.backend.Answer;
 import com.knowledge.graph.backend.Concept;
 import com.knowledge.graph.backend.Question;
 import com.knowledge.graph.backend.Student;
+import com.knowledge.graph.frontend.IndexPage;
 
 public class AnswerPanel extends JPanel {
 	private int ID;
@@ -56,6 +57,7 @@ public class AnswerPanel extends JPanel {
 		add_mentor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Mainpage.getMentors().addMentor(Mainpage.student.getStudentID(), asker.getStudentID());
+				IndexPage.redrawUserPane();
 			}
 		});
 		asker_panel.add(add_mentor);
@@ -82,6 +84,7 @@ public class AnswerPanel extends JPanel {
 		add_ans_mentor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Mainpage.getMentors().addMentor(Mainpage.student.getStudentID(), answerer.getStudentID());
+				IndexPage.redrawUserPane();
 			}
 		});
 		answerer_panel.add(add_ans_mentor);
