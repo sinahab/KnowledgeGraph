@@ -121,4 +121,38 @@ public class Answers {
 		}
 		return question;
 	}
+	/**
+	 * 
+	 * @param a_id
+	 * @return the creation date for the answer that is identified by its ID. Null if no such answer exists
+	 */
+	public String getAnswerDate(int a_id){
+		Connection connection = JdbcSqlConnection.getConnection();
+		String date = null;
+		
+		try{
+			Statement statement = connection.createStatement();
+			String query = "SELECT create_date FROM TiedAnswers WHERE a_id="+a_id;
+			
+			ResultSet rs = statement.executeQuery(query);
+			if(rs.next())
+				date = rs.getNString("create_date");
+		}
+		catch(SQLException e){
+			System.out.println("An error occured while searching!");
+			e.printStackTrace();
+		}
+		finally{
+			if(connection!=null)
+				try{
+					connection.close();
+				}
+				catch(Exception e){
+					e.printStackTrace();
+				}
+		}
+		return date;
+	}
+	
+	
 }

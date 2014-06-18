@@ -1,5 +1,6 @@
 package com.knowledge.graph.backend;
 import java.sql.*;
+import java.sql.Date;
 import java.util.*;
 
 
@@ -279,6 +280,38 @@ public class Questions {
 		else{
 			return questions;
 			}
+	}
+	/**
+	 * 
+	 * @param q_id
+	 * @return the creation date for the question that is identified by its ID. Null if no such answer exists
+	 */
+	public String getQuestionDate(int q_id){
+		Connection connection = JdbcSqlConnection.getConnection();
+		String date = null;
+		
+		try{
+			Statement statement = connection.createStatement();
+			String query = "SELECT create_date FROM AskedConceptQuestions WHERE q_id="+q_id;
+			
+			ResultSet rs = statement.executeQuery(query);
+			if(rs.next())
+				date = rs.getNString("create_date");
+		}
+		catch(SQLException e){
+			System.out.println("An error occured while searching!");
+			e.printStackTrace();
+		}
+		finally{
+			if(connection!=null)
+				try{
+					connection.close();
+				}
+				catch(Exception e){
+					e.printStackTrace();
+				}
+		}
+		return date;
 	}
 	
 	
