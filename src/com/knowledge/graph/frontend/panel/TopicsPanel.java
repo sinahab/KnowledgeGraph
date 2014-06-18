@@ -50,6 +50,9 @@ public class TopicsPanel extends DirectoryPanel {
 				if (IndexPage.questions_button != null) {
 					IndexPage.nav_bar.remove(IndexPage.questions_button);
 				}
+				if (IndexPage.questions_spacer != null) {
+					IndexPage.nav_bar.remove(IndexPage.questions_spacer);
+				}
 				IndexPage.nav_bar.revalidate();
 				IndexPage.nav_bar.repaint();
 			}
@@ -58,6 +61,12 @@ public class TopicsPanel extends DirectoryPanel {
 		IndexPage.nav_bar.add(IndexPage.concepts_spacer);
 		IndexPage.nav_bar.add(IndexPage.concepts_button);
 		IndexPage.nav_bar.revalidate();
+	}
+
+	@Override
+	protected void addAction() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

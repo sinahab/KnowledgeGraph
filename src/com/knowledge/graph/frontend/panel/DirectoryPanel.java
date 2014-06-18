@@ -9,18 +9,19 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EtchedBorder;
-import javax.swing.event.ListSelectionEvent;
 
 public abstract class DirectoryPanel extends JPanel {
 	public String name;
 	protected JLabel description;
 	protected JButton add_button;
+	protected JFormattedTextField add_field;
 	protected JButton go_button;
 	public JList list;
 	protected int ID;
@@ -32,6 +33,11 @@ public abstract class DirectoryPanel extends JPanel {
 				BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), name));
 		description.setPreferredSize(new Dimension(500,50));
 		add_button = new JButton("Add New");
+		add_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				addAction();
+			}
+		});
 		go_button = new JButton("Go");
 		go_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -57,8 +63,8 @@ public abstract class DirectoryPanel extends JPanel {
 		
 		// Add buttons
 		constraint.gridy = 2;
-		add(add_button, constraint);
 		constraint.gridx = 1;
+		constraint.gridwidth = 2;
 		constraint.anchor = GridBagConstraints.PAGE_START;
 		add(go_button, constraint);
 		
@@ -71,6 +77,18 @@ public abstract class DirectoryPanel extends JPanel {
 		constraint.anchor = GridBagConstraints.FIRST_LINE_START;
 		add(scroll, constraint);
 		
+		// Add new entry field
+		add_field = new JFormattedTextField();
+		add_field.setPreferredSize(new Dimension(400,100));
+		constraint.gridx = 0; constraint.gridy = 4;
+		constraint.weightx = 5; constraint.weighty = 1;
+		constraint.gridwidth = 1;
+		constraint.anchor = GridBagConstraints.LINE_START;
+		add(add_field, constraint);
+		constraint.gridx = 1;
+		constraint.weightx = 1;
+		add(add_button, constraint);
+		
 	}
 	
 	public String getName() {
@@ -80,4 +98,5 @@ public abstract class DirectoryPanel extends JPanel {
 	protected abstract String getDescription();
 	protected abstract DefaultListModel generateList();
 	protected abstract void goAction();
+	protected abstract void addAction();
 }

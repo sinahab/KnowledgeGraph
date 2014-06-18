@@ -54,4 +54,10 @@ public class ConceptsPanel extends DirectoryPanel {
 		IndexPage.nav_bar.add(IndexPage.questions_button);
 		IndexPage.nav_bar.revalidate();
 	}
+
+	@Override
+	protected void addAction() {
+		// TODO Auto-generated method stub
+		
+	}
 }
