@@ -142,8 +142,7 @@ public class Mentors {
 				if(rs.next())
 					mentors.add(new Mentor(ID, rs.getNString("first_name"), rs.getNString("last_name"), rs.getNString("degree"),
 						rs.getNString("password"),rs.getInt("mentored_student")));
-			}
-			
+			}	
 		}
 		catch(SQLException e){
 			System.out.println("An error occured while searching!");
