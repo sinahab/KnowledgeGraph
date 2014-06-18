@@ -56,4 +56,32 @@ public class Mainpage {
 		}
 		return mentors;
 	}
+	
+	public static Questions getQuestions() {
+		if (questions == null) {
+			questions = new Questions();
+		}
+		return questions;
+	}
+	
+	public static Concepts getConcepts() {
+		if (concepts == null) {
+			concepts = new Concepts();
+		}
+		return concepts;
+	}
+	
+	public static Subjects getSubjects() {
+		if (subjects == null) {
+			subjects = new Subjects();
+		}
+		return subjects;
+	}
+	
+	public static Topics getTopics() {
+		if (topics == null) {
+			topics = new Topics();
+		}
+		return topics;
+	}
 }

@@ -1,19 +1,31 @@
 package com.knowledge.graph.frontend.panel;
 
 import java.awt.CardLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.DefaultListModel;
-import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
+import com.knowledge.graph.Mainpage;
+import com.knowledge.graph.backend.Concept;
+import com.knowledge.graph.backend.Question;
+import com.knowledge.graph.backend.Student;
 import com.knowledge.graph.frontend.IndexPage;
 
 public class QuestionsPanel extends DirectoryPanel {
+	private JPanel user_pane;
 
-	public QuestionsPanel(int concept_id) {
+	public QuestionsPanel(int question_id) {
 		super("Question");
+		Question question = Mainpage.getQuestions().searchQuestionByID(question_id);
+		Concept concept = Mainpage.getConcepts().getConceptByID(question.getConcept_ID());
+		this.name = "Question on " + concept.getName();
+		Student student = Mainpage.getStudents().searchForStudentBySID(question.getStudent_ID());
+		user_pane = new JPanel();
+		JLabel submitted = new JLabel("Submitted by: " + student.getFullName() +
+				" on ");
+		user_pane.add(submitted);
+		JLabel username = new JLabel();
 	}
 
 	@Override
