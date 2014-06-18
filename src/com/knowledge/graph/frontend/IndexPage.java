@@ -147,11 +147,12 @@ public class IndexPage extends Page {
 		}
 		// checking to find mentees.
 		Mentor mentor =  Mainpage.getMentors().getMentorByID( Mainpage.student.getStudentID() );
-		List<Student> student_mentees = mentor.getMentees();
 
-		if ( mentor.getMentees() != null) {
-			for ( Student mentee : mentor.getMentees() ) {
-				mentees.add(new DefaultMutableTreeNode( mentee.getFullName()) );
+		if (mentor != null) {
+			if ( mentor.getMentees() != null) {
+				for ( Student mentee : mentor.getMentees() ) {
+					mentees.add(new DefaultMutableTreeNode( mentee.getFullName()) );
+				}
 			}
 		}
 	}	
