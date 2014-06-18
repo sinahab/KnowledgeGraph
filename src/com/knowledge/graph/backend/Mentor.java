@@ -24,7 +24,8 @@ public class Mentor extends Student{
 		return mentored_students;
 	}
 	
-	public void approveQuestion(){
+	public void approveQuestion(int q_id, int mentored_sid){
+		Connection connection = JdbcSqlConnection.getConnection();
 		
 	}
 	

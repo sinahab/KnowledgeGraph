@@ -31,7 +31,11 @@ public class Answers {
 					e.printStackTrace();
 				}
 		}
-		return tied_answers;
+		if(tied_answers.isEmpty())
+			return null;
+		else{
+			return tied_answers;
+			}
 	}// end getAnswerBySID
 	
 	public Question getTied_Question(int q_id){

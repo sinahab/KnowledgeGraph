@@ -58,7 +58,7 @@ public class Students {
 		Student student = null;
 		Connection connection = JdbcSqlConnection.getConnection();
 		try{
-			String query = "SELECT * FROM Students WHERE student_number="+sid;
+			String query = "SELECT * FROM Students WHERE student_number = " + sid + ";";
 			Statement statement = connection.createStatement();
 			ResultSet rs = statement.executeQuery(query);
 			if(rs.next()){
@@ -79,9 +79,7 @@ public class Students {
 					e.printStackTrace();
 				}
 		}
+		
 		return student;
 	}
-	
-	
-	
 }

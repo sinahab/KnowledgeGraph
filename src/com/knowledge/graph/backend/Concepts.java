@@ -59,7 +59,11 @@ public class Concepts {
 					e.printStackTrace();
 				}
 		}
-		return tied_questions;
+		if(tied_questions.isEmpty())
+			return null;
+		else{
+			return tied_questions;
+			}
 	}
 	
 }
