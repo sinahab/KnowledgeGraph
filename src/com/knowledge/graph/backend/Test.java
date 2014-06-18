@@ -54,7 +54,7 @@ public class Test {
 	
 		System.out.println("-------------------------------TEST 4-------------------------------------");
 		Students s1 = new Students();
-		s1.addStudent("Bob marley", "Jok", "Fail", 55565556, "123456");
+		
 	}
 
 }

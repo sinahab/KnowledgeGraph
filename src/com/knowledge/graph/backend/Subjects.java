@@ -87,4 +87,37 @@ public class Subjects {
 			}
 	}
 	
+	public List<Subject> getAllSubjects(){
+		Connection connection = JdbcSqlConnection.getConnection();
+		List<Subject> subjects = new ArrayList<Subject>();
+		try{
+			Statement statement = connection.createStatement();
+			String query ="SELECT * FROM Subjects";
+			ResultSet rs = statement.executeQuery(query);
+			
+			while(rs.next()){
+				subjects.add(new Subject(rs.getInt("s_id"), rs.getNString("s_name"), rs.getNString("description")));
+			}
+		}
+		catch(SQLException e){
+			System.out.println("An error occured while searching!");
+			e.printStackTrace();
+		}
+		finally{
+			if(connection!=null)
+				try{
+					connection.close();
+				}
+				catch(Exception e){
+					e.printStackTrace();
+				}
+		}
+		if(subjects.isEmpty())
+			return null;
+		else{
+			return subjects;
+			}
+		
+	}
+	
 }
