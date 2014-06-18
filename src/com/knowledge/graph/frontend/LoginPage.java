@@ -59,8 +59,7 @@ public class LoginPage extends Page {
 			public void actionPerformed(ActionEvent event) {
 				String sid_text_field = sid_field.getText();
 				if (isValidSID(sid_text_field)) {
-					Mainpage.students = new Students();
-					Student student = Mainpage.students.searchForStudentBySID( Integer.parseInt( sid_text_field ));
+					Student student = Mainpage.getStudents().searchForStudentBySID( Integer.parseInt( sid_text_field ));
 					if ( student != null ) {
 						if ( student.checkPassword( new String(pass_field.getPassword()) ) ) {
 							Mainpage.student = student;

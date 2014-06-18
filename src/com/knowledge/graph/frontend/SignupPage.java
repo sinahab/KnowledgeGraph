@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.knowledge.graph.Mainpage;
+import com.knowledge.graph.backend.Students;
 
 public class SignupPage extends Page {
 
@@ -67,6 +68,11 @@ public class SignupPage extends Page {
 						isNonEmptyString(lnameField.getText()) &&
 						isNonEmptyString(degField.getText()) &&
 						isNonEmptyString(passField.getText()) ) {
+					Mainpage.getStudents().addStudent(fnameField.getText(),
+							lnameField.getText(),
+							degField.getText(),
+							Integer.parseInt(sidField.getText()),
+							passField.getText());
 					Mainpage.indexpage = new IndexPage();
 					Mainpage.signuppage.setVisible(false);
 					Mainpage.indexpage.setVisible(true);

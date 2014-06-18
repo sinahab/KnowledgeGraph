@@ -40,4 +40,11 @@ public class Mainpage {
 	        }
 	    });
 	}
+	
+	public static Students getStudents() {
+		if (students == null) {
+			students = new Students();
+		}
+		return students;
+	}
 }

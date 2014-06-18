@@ -14,8 +14,6 @@ import javax.swing.JPanel;
 import com.knowledge.graph.Mainpage;
 
 public class Homepage extends Page {
-	
-	
 	public Homepage() {
 		// Setup box layout
 		JPanel background = new JPanel(new GridBagLayout());
