@@ -108,6 +108,10 @@ public class IndexPage extends Page {
 		quicklinks.add(my_questions);
 		JButton my_answers = new JButton("My Answers");
 		quicklinks.add(my_answers);
+		JButton pending_approval = new JButton("<html>My answers<br>pending approval</html>");
+		quicklinks.add(pending_approval);
+		JButton waiting_approval = new JButton("<html>Answers awaiting<br>my approval</html>");
+		quicklinks.add(waiting_approval);
 		
 		background.add(quicklinks, BorderLayout.LINE_START);
 		

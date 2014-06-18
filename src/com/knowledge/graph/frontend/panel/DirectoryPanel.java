@@ -34,7 +34,7 @@ public abstract class DirectoryPanel extends JPanel {
 		this.description = new JLabel(description);
 		this.description.setBorder(BorderFactory.createTitledBorder(
 				BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), name));
-		this.description.setPreferredSize(new Dimension(500,50));
+		this.description.setPreferredSize(new Dimension(350,50));
 		add_button = new JButton("Add New");
 		add_button.setPreferredSize(new Dimension(100,100));
 		add_button.addActionListener(new ActionListener() {
@@ -57,9 +57,9 @@ public abstract class DirectoryPanel extends JPanel {
 		});
 
 		add_name = new JFormattedTextField();
-		add_name.setPreferredSize(new Dimension(400,20));
+		add_name.setPreferredSize(new Dimension(350,20));
 		add_field = new JFormattedTextField();
-		add_field.setPreferredSize(new Dimension(400,50));
+		add_field.setPreferredSize(new Dimension(350,50));
 		
 	}
 	
@@ -86,7 +86,7 @@ public abstract class DirectoryPanel extends JPanel {
 		
 		// Add Scrollpane and list
 	    scroll = new JScrollPane(list);
-		scroll.setPreferredSize(new Dimension(500, 200));
+		scroll.setPreferredSize(new Dimension(350, 200));
 		constraint.gridx = 0; constraint.gridy = 3;
 		constraint.weightx = 2; constraint.weighty = 10;
 		constraint.gridwidth = 2;
@@ -122,7 +122,7 @@ public abstract class DirectoryPanel extends JPanel {
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.setLayoutOrientation(JList.VERTICAL);
 		scroll = new JScrollPane(list);
-		scroll.setPreferredSize(new Dimension(500, 200));
+		scroll.setPreferredSize(new Dimension(350, 200));
 		constraint.gridx = 0; constraint.gridy = 3;
 		constraint.weightx = 2; constraint.weighty = 10;
 		constraint.gridwidth = 2;
