@@ -119,6 +119,46 @@ public class Mentors {
 		return is_a_mentor;
 	}
 
-	
+	public List<Mentor> approvedQuestion(int a_id){
+		Connection connection = JdbcSqlConnection.getConnection();
+		List<Mentor> mentors  = new ArrayList<Mentor>();
+		try{
+			Statement statement = connection.createStatement();
+			//retrieves the student numbers of mentors who approved this question
+			String query  = "SELECT student_number FROM MentorApproves  WHERE a_id="+a_id+";";
+			ResultSet rs = statement.executeQuery(query);
+			
+			while(rs.next()){
+				int mentor_id = rs.getInt("student_number");
+				//Extract mentor tuples and their mentees ID using the mentor's student number 
+				String query2 = "SELECT s.*, m.mentored_student FROM Mentors m, Students s WHERE m.student_number="+mentor_id
+						+" AND s.student_number=m.student_number;";
+				ResultSet rs2 = statement.executeQuery(query2);
+				if(rs2.next()){
+					mentors.add( new Mentor(mentor_id, rs2.getNString("first_name"), rs2.getNString("last_name"), rs2.getNString("degree"),
+						rs2.getNString("password"),rs2.getInt("mentored_student")));
+				}
+			}
+		}
+		catch(SQLException e){
+			System.out.println("An error occured while searching!");
+			e.printStackTrace();
+		}
+		finally{
+			if(connection!=null)
+				try{
+					connection.close();
+				}
+				catch(Exception e){
+					e.printStackTrace();
+				}
+		}
+		if(mentors.isEmpty()){
+			return null;
+		}
+		else{
+			return mentors;
+		}
+	}
 	
 }
