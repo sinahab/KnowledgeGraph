@@ -19,6 +19,7 @@ import javax.swing.JTree;
 import javax.swing.border.EtchedBorder;
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import com.knowledge.graph.Mainpage;
 import com.knowledge.graph.frontend.panel.ConceptsPanel;
 import com.knowledge.graph.frontend.panel.QuestionsPanel;
 import com.knowledge.graph.frontend.panel.SubjectsPanel;
@@ -37,7 +38,7 @@ public class IndexPage extends Page {
 		
 		// Name panel for name and date
 		JPanel name_pane = new JPanel(new BorderLayout());
-		JLabel name = new JLabel(getStudentName());
+		JLabel name = new JLabel("Welcome " + getStudentName() + "!");
 		name_pane.add(name, BorderLayout.LINE_START);
 		JLabel date = new JLabel(getDate());
 		name_pane.add(date, BorderLayout.LINE_END);
@@ -102,7 +103,7 @@ public class IndexPage extends Page {
 	}
 	
 	private String getStudentName() {
-		return "Justin Timberlake";
+		return Mainpage.student.getFullName();
 	}
 	
 	private String getDate() {
