@@ -24,9 +24,29 @@ public class Mentor extends Student{
 		return mentored_students;
 	}
 	
-	public void approveQuestion(int q_id, int mentored_sid){
+	public boolean approveQuestion(int answer_id){
+		boolean approval_success = false;
 		Connection connection = JdbcSqlConnection.getConnection();
-		
+		try{
+			Statement statement = connection.createStatement();
+			String query = "UPDATE TiedAnswers SET status=approved WHERE a_id="+answer_id;
+			statement.executeUpdate(query);
+			approval_success = true;
+		}
+		catch(SQLException e){
+			System.out.println("An error occured while updating or the answer doesn't exist!");
+			e.printStackTrace();
+		}
+		finally{
+			if(connection!=null)
+				try{
+					connection.close();
+				}
+				catch(Exception e){
+					e.printStackTrace();
+				}
+		}
+		return approval_success;
 	}
 	
 }

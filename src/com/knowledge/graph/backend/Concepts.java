@@ -4,6 +4,33 @@ import java.util.*;
 
 public class Concepts {
 	
+	public boolean addConcept(int topic_id, String concept_name, String description){
+		boolean success = false;
+		Connection connection = JdbcSqlConnection.getConnection();
+		try{
+			Statement statement = connection.createStatement();
+			String update = "INSERT INTO BelongedConcepts( t_id, c_name, description) VALUES ("+
+							topic_id+", "+concept_name+", "+description+");";
+			int result = statement.executeUpdate(update);
+			if(result==1)
+				success=true;
+		}
+		catch(SQLException e){
+			System.out.println("An error occured while updating!");
+			e.printStackTrace();
+		}
+		finally{
+			if(connection!=null)
+				try{
+					connection.close();
+				}
+				catch(Exception e){
+					e.printStackTrace();
+				}
+		}
+		return success;
+	}
+	
 	public Concept getConceptByID(int concept_id){
 		Connection connection = JdbcSqlConnection.getConnection();
 		Concept concept = null;
