@@ -18,10 +18,12 @@ import com.knowledge.graph.backend.Student;
 import com.knowledge.graph.backend.Students;
 
 public class LoginPage extends Page {
+	
+	private JPanel background;
 
 	public LoginPage() {
 		// Setup box layout
-		JPanel background = new JPanel(new GridBagLayout());
+		background = new JPanel(new GridBagLayout());
 		GridBagConstraints constraint = new GridBagConstraints();
 		constraint.fill = GridBagConstraints.HORIZONTAL;
 		constraint.anchor = GridBagConstraints.CENTER;
@@ -55,19 +57,29 @@ public class LoginPage extends Page {
 		JButton login_button = new JButton("Login");
 		login_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				Mainpage.dbStudents = new Students();
-				Student student = Mainpage.dbStudents.searchForStudentBySID( Integer.parseInt( sid_field.getText()) );
-				if ( student.checkPassword( new String(pass_field.getPassword()) ) ) {
-					Mainpage.indexpage = new IndexPage();
-					Mainpage.loginpage.setVisible(false);
-					Mainpage.indexpage.setVisible(true);
+				String sid_text_field = sid_field.getText();
+				if ( isValidSID(sid_text_field)) {
+					Mainpage.students = new Students();
+					Student student = Mainpage.students.searchForStudentBySID( Integer.parseInt( sid_text_field ));
+					if ( student != null ) {
+						if ( student.checkPassword( new String(pass_field.getPassword()) ) ) {
+							Mainpage.student = student;
+							Mainpage.indexpage = new IndexPage();
+							Mainpage.loginpage.setVisible(false);
+							Mainpage.indexpage.setVisible(true);
+						} else {
+							printLoginError();
+						}
+					} else {
+						printLoginError();
+					}
 				} else {
-					
+					printLoginError();
 				}
 		   }
 	    });
 		constraint.anchor = GridBagConstraints.LAST_LINE_START;
-		constraint.gridx = 0; constraint.gridy = 2;
+		constraint.gridx = 0; constraint.gridy = 4;
 		constraint.insets = new Insets(10, 10, 10, 5);
 		login_button.setPreferredSize(new Dimension(20,50));
 		background.add(login_button, constraint);
@@ -87,5 +99,33 @@ public class LoginPage extends Page {
 		background.add(cancel_button, constraint);
 		
 		this.add(background);
+	}
+	
+	private boolean isInteger(String s) {
+	    try { 
+	        Integer.parseInt(s); 
+	    } catch(NumberFormatException e) { 
+	        return false; 
+	    }
+	    return true;
+	}
+	
+	private boolean isValidSID(String s) {
+		if ( s!="" && isInteger(s)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	private void printLoginError() {
+		GridBagConstraints c = new GridBagConstraints();
+		JLabel loginErrorLabel = new JLabel("Wrong student number / password. Please try again.", JLabel.RIGHT);
+		c.gridx = 1; c.gridy = 3;
+		c.gridwidth = 1; c.gridheight = 1;
+		c.weightx = 1; c.weighty = 0;
+		background.add(loginErrorLabel, c);
+		background.revalidate();
+		background.repaint();
 	}
 }

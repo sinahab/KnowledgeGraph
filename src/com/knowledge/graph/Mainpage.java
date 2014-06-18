@@ -5,6 +5,7 @@ import javax.swing.SwingUtilities;
 import com.knowledge.graph.backend.Answers;
 import com.knowledge.graph.backend.Concepts;
 import com.knowledge.graph.backend.Questions;
+import com.knowledge.graph.backend.Student;
 import com.knowledge.graph.backend.Students;
 import com.knowledge.graph.backend.Subjects;
 import com.knowledge.graph.backend.Topics;
@@ -22,12 +23,14 @@ public class Mainpage {
 	public static IndexPage indexpage;
 	public static QuestionsPanel questionspage;
 	
-	public static Answers dbAnswers;
-	public static Concepts dbConcepts;
-	public static Questions dbQuestions;
-	public static Students dbStudents;
-	public static Subjects dbSubjects;
-	public static Topics dbTopics;
+	public static Answers answers;
+	public static Concepts concepts;
+	public static Questions questions;
+	public static Students students;
+	public static Subjects subjects;
+	public static Topics topics;
+	
+	public static Student student;
 	
 	public static void main(String[] args) {
 	    SwingUtilities.invokeLater(new Runnable() {
