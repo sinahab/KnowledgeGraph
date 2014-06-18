@@ -9,14 +9,14 @@ public class Students {
 		boolean success = false;
 		Connection connection = JdbcSqlConnection.getConnection();
 		try{
-<<<<<<< HEAD
+
 			String update = "INSERT INTO Students (student_number, first_name, last_name, degree, password )"
 							+ "VALUES ("+ student_ID+", \""+first_name+"\", \""+last_name+"\", \""+degree+"\",\""+password+"\");";
-=======
+
 			String query = "INSERT INTO Students (student_number, first_name, last_name, degree, password)"
 							+ " VALUES ("+ student_ID+", \""+first_name+"\", \""+last_name+"\", \""+degree+"\", \""+password+"\");";
 			System.out.println(query);
->>>>>>> 019841f0b141fef48d1e10a167dee55eb4e74836
+
 			Statement statement = connection.createStatement();
 			int result  = statement.executeUpdate(update);
 			if(result==1)
