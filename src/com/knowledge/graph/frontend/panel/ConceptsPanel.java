@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.ListSelectionModel;
 
 import com.knowledge.graph.frontend.IndexPage;
 
@@ -15,6 +17,10 @@ public class ConceptsPanel extends DirectoryPanel {
 	public ConceptsPanel(int ID) {
 		super("Concept", "Algebra is such a fun concept!");
 		this.ID = ID;
+		list = new JList(generateList());
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		list.setLayoutOrientation(JList.VERTICAL);
+		generateGUI();
 	}
 
 	@Override

@@ -44,11 +44,7 @@ public abstract class DirectoryPanel extends JPanel {
 				goAction();
 			}
 		});
-		list = new JList(generateList());
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		list.setLayoutOrientation(JList.VERTICAL);
 		
-		generateGUI();
 	}
 	
 	protected void generateGUI() {

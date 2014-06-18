@@ -38,12 +38,12 @@ public class Question {
 		return student_id;
 	}
 	
-public List<Answer> getTiedAnswers(int q_id){
+public List<Answer> getTiedAnswers(){
 		
 		Connection connection = JdbcSqlConnection.getConnection();
 		List<Answer> tied_answers = new ArrayList<Answer>();
 		try{
-			String query = "SELECT * FROM TiedAnswers WHERE q_id ="+q_id;
+			String query = "SELECT * FROM TiedAnswers WHERE q_id ="+question_id+";";
 			Statement statement = connection.createStatement();
 			ResultSet rs = statement.executeQuery(query);
 			

@@ -4,13 +4,17 @@ import java.awt.CardLayout;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.ListSelectionModel;
 
 import com.knowledge.graph.Mainpage;
+import com.knowledge.graph.backend.Answer;
 import com.knowledge.graph.backend.Concept;
 import com.knowledge.graph.backend.Question;
 import com.knowledge.graph.backend.Student;
@@ -19,12 +23,17 @@ import com.knowledge.graph.frontend.IndexPage;
 public class QuestionsPanel extends DirectoryPanel {
 	private JPanel user_pane;
 	private Student student;
+	private Question question;
 
 	public QuestionsPanel(int question_id) {
-		super("Question", "Why is the sky blue?");
-		Question question = Mainpage.getQuestions().searchQuestionByID(question_id);
+		super("","");
+		question = Mainpage.getQuestions().searchQuestionByID(question_id);
 		Concept concept = Mainpage.getConcepts().getConceptByID(question.getConcept_ID());
 		this.name = "Question on " + concept.getName();
+		this.description.setText(question.getText());
+		list = new JList(generateList());
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		list.setLayoutOrientation(JList.VERTICAL);
 		student = Mainpage.getStudents().searchForStudentBySID(question.getStudent_ID());
 		user_pane = new JPanel();
 		JLabel submitted = new JLabel("Asked by: " + student.getFullName() +
@@ -43,15 +52,18 @@ public class QuestionsPanel extends DirectoryPanel {
 		constraint.gridwidth = 1; constraint.gridheight = 1;
 		constraint.anchor = GridBagConstraints.FIRST_LINE_START;
 		add(user_pane, constraint);
-		revalidate();
-		repaint();
+		generateGUI();
 	}
 
 	@Override
 	protected DefaultListModel generateList() {
 		DefaultListModel model = new DefaultListModel();
-		model.addElement(new NodeWrapper("Because your face.", 1));
-		model.addElement(new NodeWrapper("Ask Sina Habibian", 2));
+		List<Answer> answers = question.getTiedAnswers();
+		if (answers != null) {
+			for (Answer ans : answers) {
+				model.addElement(new NodeWrapper(ans.getText(), ans.getAnswerID()));
+			}
+		}
 		return model;
 	}
 
