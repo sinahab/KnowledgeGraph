@@ -9,22 +9,18 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import com.knowledge.graph.Mainpage;
+import com.knowledge.graph.backend.Subject;
 import com.knowledge.graph.frontend.IndexPage;
 
 public class TopicsPanel extends DirectoryPanel {
 	
-	// private static subject = Mainpage.getSubjects(). 
+	private Subject subject;
 	
 	public TopicsPanel(int ID) {
-		super("Topic");
-		// super( Mainpage.getSubjects().getSubjectByID(ID).getName() );
+		super( Mainpage.getSubjects().getSubjectByID(ID).getName(), 
+				Mainpage.getSubjects().getSubjectByID(ID).getDescription());
+		this.subject = Mainpage.getSubjects().getSubjectByID(ID);
 		this.ID = ID;
-	}
-
-	@Override
-	protected String getDescription() {
-		return "Mathematical!";
-		// return Mainpage.getSubjects().getSubjectByID(ID).getDescription()
 	}
 
 	@Override

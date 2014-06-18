@@ -16,7 +16,7 @@ public class QuestionsPanel extends DirectoryPanel {
 	private JPanel user_pane;
 
 	public QuestionsPanel(int question_id) {
-		super("Question");
+		super("Question", "Why is the sky blue?");
 		Question question = Mainpage.getQuestions().searchQuestionByID(question_id);
 		Concept concept = Mainpage.getConcepts().getConceptByID(question.getConcept_ID());
 		this.name = "Question on " + concept.getName();
@@ -26,11 +26,6 @@ public class QuestionsPanel extends DirectoryPanel {
 				" on ");
 		user_pane.add(submitted);
 		JLabel username = new JLabel();
-	}
-
-	@Override
-	protected String getDescription() {
-		return "Why is the sky blue?";
 	}
 
 	@Override

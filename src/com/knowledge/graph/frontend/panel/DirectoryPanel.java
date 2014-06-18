@@ -26,12 +26,12 @@ public abstract class DirectoryPanel extends JPanel {
 	public JList list;
 	protected int ID;
 	
-	public DirectoryPanel(String name) {
+	public DirectoryPanel(String name, String description) {
 		this.name = name;
-		description = new JLabel(getDescription());
-		description.setBorder(BorderFactory.createTitledBorder(
+		this.description = new JLabel(description);
+		this.description.setBorder(BorderFactory.createTitledBorder(
 				BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), name));
-		description.setPreferredSize(new Dimension(500,50));
+		this.description.setPreferredSize(new Dimension(500,50));
 		add_button = new JButton("Add New");
 		add_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -95,7 +95,6 @@ public abstract class DirectoryPanel extends JPanel {
 		return name;
 	}
 	
-	protected abstract String getDescription();
 	protected abstract DefaultListModel generateList();
 	protected abstract void goAction();
 	protected abstract void addAction();
