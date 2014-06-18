@@ -9,13 +9,14 @@ public class Students {
 		
 		Connection connection = JdbcSqlConnection.getConnection();
 		try{
-			String query = "INSERT INTO Students (student_number, first_name, last_name, degree, password )"
-							+ "VALUES ("+ student_ID+", "+first_name+", "+last_name+", "+degree+","+password+");";
+			String query = "INSERT INTO Students (student_number, first_name, last_name, degree, password)"
+							+ " VALUES ("+ student_ID+", \""+first_name+"\", \""+last_name+"\", \""+degree+"\", \""+password+"\");";
 			Statement statement = connection.createStatement();
 			statement.executeUpdate(query);
 		}
 		catch(SQLException e){
 			System.out.println("Insertion of student was unsuccesful!");
+			e.printStackTrace();
 		}
 		finally{
 			if(connection!=null){

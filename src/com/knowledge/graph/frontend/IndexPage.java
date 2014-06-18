@@ -130,14 +130,5 @@ public class IndexPage extends Page {
 		mentors.add(new DefaultMutableTreeNode("Yoda"));
 		mentees.add(new DefaultMutableTreeNode("Obi Wan"));
 		mentees.add(new DefaultMutableTreeNode("Luke Skywalker"));
-	}
-	
-	public static void main(String[] args) {
-	    SwingUtilities.invokeLater(new Runnable() {
-	        public void run() {
-	        	IndexPage i = new IndexPage();
-	        	i.setVisible(true);
-	        }
-	    });
-	}
+	}	
 }
