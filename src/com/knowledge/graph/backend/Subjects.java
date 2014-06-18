@@ -10,7 +10,7 @@ public class Subjects {
 		try{
 			Statement statement = connection.createStatement();
 			String query = "INSERT INTO Subjects(s_name, description) VALUES (\""+subject_name+"\", \""+description
-					+"\")";
+					+"\");";
 			statement.executeUpdate(query);
 		}
 		catch(SQLException e){
@@ -33,7 +33,7 @@ public class Subjects {
 		List<Subject> subjects = new ArrayList<Subject>();
 		try{
 			Statement statement = connection.createStatement();
-			String query ="SELECT * FROM Subjects";
+			String query ="SELECT * FROM Subjects;";
 			ResultSet rs = statement.executeQuery(query);
 			
 			while(rs.next()){
@@ -67,7 +67,7 @@ public class Subjects {
 		
 		try{
 			Statement statement = connection.createStatement();
-			String query = "SELECT * FROM BelongedTopics WHERE s_id="+subject_id;
+			String query = "SELECT * FROM BelongedTopics WHERE s_id="+subject_id+";";
 			ResultSet rs = statement.executeQuery(query);
 			
 			while(rs.next()){
@@ -99,7 +99,7 @@ public class Subjects {
 		Connection connection = JdbcSqlConnection.getConnection();
 		try{
 			Statement statement = connection.createStatement();
-			String update = "UPDATE Subjects SET description=\""+new_description+"\" WHERE s_id="+s_id;
+			String update = "UPDATE Subjects SET description=\""+new_description+"\" WHERE s_id="+s_id+";";
 			int result  = statement.executeUpdate(update);
 			if(result==1)
 				success = true;
@@ -126,7 +126,7 @@ public class Subjects {
 		
 		try{
 			Statement statement = connection.createStatement();
-			String query = "SELECT * FROM Subjects WHERE s_id="+subject_id;
+			String query = "SELECT * FROM Subjects WHERE s_id="+subject_id+";";
 			ResultSet rs = statement.executeQuery(query);
 			
 			if(rs.next())

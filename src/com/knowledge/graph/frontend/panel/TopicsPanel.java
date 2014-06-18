@@ -29,7 +29,9 @@ public class TopicsPanel extends DirectoryPanel {
 	@Override
 	protected DefaultListModel generateList() {
 		DefaultListModel model = new DefaultListModel();
-		List<Topic> topics = Mainpage.getSubjects().getTiedTopics(this.subject.getID());
+		System.out.println(this.ID);
+		
+		List<Topic> topics = Mainpage.getSubjects().getTiedTopics(this.ID);
 		
 		for (int i = 0; i < topics.size(); i++ ) {
 			model.addElement( new NodeWrapper(topics.get(i).getName(), topics.get(i).getTopicID()) );
