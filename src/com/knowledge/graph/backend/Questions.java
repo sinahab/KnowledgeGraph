@@ -250,6 +250,31 @@ public class Questions {
 			}
 	}
 	
-	
+	public boolean deleteQuestionByID(int question_id){
+		Connection connection = JdbcSqlConnection.getConnection();
+		boolean success = false;
+		
+		try{
+			Statement statement = connection.createStatement();
+			String update = "DELETE FROM AskedConceptQuestions WHERE q_id="+question_id;
+			int result = statement.executeUpdate(update);
+			if(result==1)
+				success = true;
+		}
+		catch(SQLException e){
+			System.out.println("An error occured while searching!");
+			e.printStackTrace();
+		}
+		finally{
+			if(connection!=null)
+				try{
+					connection.close();
+				}
+				catch(Exception e){
+					e.printStackTrace();
+				}
+		}
+		return success;
+	}
 	
 }
