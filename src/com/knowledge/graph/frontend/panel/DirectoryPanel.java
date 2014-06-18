@@ -26,12 +26,12 @@ public abstract class DirectoryPanel extends JPanel {
 	public JList list;
 	protected int ID;
 	
-	public DirectoryPanel(String name) {
+	public DirectoryPanel(String name, String description) {
 		this.name = name;
-		description = new JLabel(getDescription());
-		description.setBorder(BorderFactory.createTitledBorder(
+		this.description = new JLabel(description);
+		this.description.setBorder(BorderFactory.createTitledBorder(
 				BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), name));
-		description.setPreferredSize(new Dimension(500,50));
+		this.description.setPreferredSize(new Dimension(500,50));
 		add_button = new JButton("Add New");
 		add_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -70,7 +70,7 @@ public abstract class DirectoryPanel extends JPanel {
 		
 		// Add Scrollpane and list
 		JScrollPane scroll = new JScrollPane(list);
-		scroll.setPreferredSize(new Dimension(500, 300));
+		scroll.setPreferredSize(new Dimension(500, 200));
 		constraint.gridx = 0; constraint.gridy = 3;
 		constraint.weightx = 2; constraint.weighty = 10;
 		constraint.gridwidth = 2;
@@ -79,7 +79,7 @@ public abstract class DirectoryPanel extends JPanel {
 		
 		// Add new entry field
 		add_field = new JFormattedTextField();
-		add_field.setPreferredSize(new Dimension(400,100));
+		add_field.setPreferredSize(new Dimension(400,50));
 		constraint.gridx = 0; constraint.gridy = 4;
 		constraint.weightx = 5; constraint.weighty = 1;
 		constraint.gridwidth = 1;
@@ -95,7 +95,6 @@ public abstract class DirectoryPanel extends JPanel {
 		return name;
 	}
 	
-	protected abstract String getDescription();
 	protected abstract DefaultListModel generateList();
 	protected abstract void goAction();
 	protected abstract void addAction();

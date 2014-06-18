@@ -20,7 +20,7 @@ public class SubjectsPanel extends DirectoryPanel {
 	private int selected_index;
 	
 	public SubjectsPanel() {
-		super("Subjects");
+		super("Subjects", "This is a list of all subjects");
 		selected_index = -1;
 	}
 
@@ -29,14 +29,9 @@ public class SubjectsPanel extends DirectoryPanel {
 		DefaultListModel list = new DefaultListModel();
 		List<Subject> allSubjects = Mainpage.getSubjects().getAllSubjects();
 		for (int i = 0; i < allSubjects.size(); i++ ) {
-			list.addElement(new NodeWrapper(allSubjects.get(i).getName(), i));
+			list.addElement(new NodeWrapper(allSubjects.get(i).getName(), allSubjects.get(i).getID()));
 		}
 		return list;
-	}
-
-	@Override
-	protected String getDescription() {
-		return "This is a list of all subjects";
 	}
 
 	@Override

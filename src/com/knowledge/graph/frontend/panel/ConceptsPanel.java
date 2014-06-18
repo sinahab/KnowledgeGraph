@@ -13,13 +13,8 @@ import com.knowledge.graph.frontend.IndexPage;
 public class ConceptsPanel extends DirectoryPanel {
 
 	public ConceptsPanel(int ID) {
-		super("Concept");
+		super("Concept", "Algebra is such a fun concept!");
 		this.ID = ID;
-	}
-
-	@Override
-	protected String getDescription() {
-		return "Algebra is such a fun concept!";
 	}
 
 	@Override
