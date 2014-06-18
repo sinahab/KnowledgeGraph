@@ -11,6 +11,7 @@ public class Students {
 		try{
 			String query = "INSERT INTO Students (student_number, first_name, last_name, degree, password)"
 							+ " VALUES ("+ student_ID+", \""+first_name+"\", \""+last_name+"\", \""+degree+"\", \""+password+"\");";
+			System.out.println(query);
 			Statement statement = connection.createStatement();
 			statement.executeUpdate(query);
 		}

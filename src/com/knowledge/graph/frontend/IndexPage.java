@@ -54,7 +54,10 @@ public class IndexPage extends Page {
 		JButton logout = new JButton("Logout");
 		logout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				Mainpage.student = null;
+				Mainpage.homepage = new Homepage();
+				Mainpage.indexpage.setVisible(false);
+				Mainpage.homepage.setVisible(true);
 			}
 		});
 		name_pane.add(logout, BorderLayout.LINE_END);
